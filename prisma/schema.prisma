@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Destination {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  region      String
+  country     String?
+  shortDesc   String?
+  content     String?   @db.Text
+  heroImage   String?
+  gallery     String[]  @default([])
+  isFeatured  Boolean   @default(false)
+  bestTime    String?
+  whyVisit    String?   @db.Text
+  seoTitle    String?
+  seoDesc     String?
+  isPublished Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  packages    Package[]
+}
+
+model Package {
+  id            String       @id @default(cuid())
+  slug          String       @unique
+  title         String
+  destinationId String?
+  destination   Destination? @relation(fields: [destinationId], references: [id])
+  duration      String?
+  priceFrom     Float?
+  shortDesc     String?
+  content       String?      @db.Text
+  heroImage     String?
+  gallery       String[]     @default([])
+  isFeatured    Boolean      @default(false)
+  seoTitle      String?
+  seoDesc       String?
+  isPublished   Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model Lead {
+  id               String    @id @default(cuid())
+  name             String
+  email            String
+  phone            String
+  travelType       String?
+  destination      String?
+  travelDate       String?
+  numTravellers    String?
+  budget           String?
+  preferredPackage String?
+  message          String?   @db.Text
+  source           String?   @default("website")
+  utmSource        String?
+  utmMedium        String?
+  utmCampaign      String?
+  status           String    @default("new")
+  notes            String?   @db.Text
+  followUpDate     DateTime?
+  assignedTo       String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model BlogPost {
+  id                String    @id @default(cuid())
+  slug              String    @unique
+  title             String
+  introText         String?   @db.Text
+  content           String?   @db.Text
+  contentHtml       String?   @db.Text
+  featuredImage     String?
+  coverImageUrl     String?
+  category          String?
+  tags              String[]  @default([])
+  author            String?   @default("Exploration Tours")
+  primaryKeyword    String?
+  secondaryKeywords String[]  @default([])
+  faqs              Json?
+  seoTitle          String?
+  seoDesc           String?
+  pageTitle         String?
+  source            String?   @default("manual")
+  isPublished       Boolean   @default(false)
+  publishedAt       DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Testimonial {
+  id           String   @id @default(cuid())
+  customerName String
+  review       String   @db.Text
+  rating       Int      @default(5)
+  image        String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String   @db.Text
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  title     String?
+  subtitle  String?
+  ctaText   String?
+  ctaLink   String?
+  image     String?
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
