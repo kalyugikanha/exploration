@@ -12,7 +12,8 @@ export default async function HomePage() {
     prisma.destination.findMany({ where: { region: 'domestic', isPublished: true }, take: 8 }),
     prisma.destination.findMany({ where: { region: 'international', isPublished: true }, take: 8 }),
     prisma.testimonial.findMany({ where: { isActive: true }, take: 10 }),
-    prisma.blogPost.findMany({ where: { isPublished: true }, orderBy: { publishedAt: 'desc' }, take: 4 })
+    prisma.blogPost.findMany({ where: { isPublished: true }, orderBy: { publishedAt: 'desc' }, take: 4 }),
+    prisma.package.findMany({ where: { isFeatured: true, isPublished: true }, include: { destination: true }, take: 6 })
   ]);
 
   const data = setting ? JSON.parse(setting.value) : {
