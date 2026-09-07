@@ -102,3 +102,46 @@ export async function savePageSettings(formData: FormData) {
   revalidatePath('/');
   revalidatePath(`/admin/pages/${pageKey.replace('page_', '')}`);
 }
+
+export async function savePackage(formData: FormData) {
+  const id = formData.get('id') as string;
+  const title = formData.get('title') as string;
+  const destinationId = formData.get('destinationId') as string;
+  const duration = formData.get('duration') as string;
+  const priceFrom = parseFloat(formData.get('priceFrom') as string) || 0;
+  const shortDesc = formData.get('shortDesc') as string;
+  const content = formData.get('content') as string;
+  const heroImage = formData.get('heroImage') as string;
+  const isPublished = formData.get('isPublished') === 'on';
+  const isFeatured = formData.get('isFeatured') === 'on';
+
+  let slug = slugify(title);
+
+  if (!id || id === 'new') {
+    const existing = await prisma.package.findUnique({ where: { slug } });
+    if (existing) slug = `${slug}-${Date.now()}`;
+    
+    await prisma.package.create({
+      data: {
+        title, slug, destinationId: destinationId || null, duration, priceFrom, shortDesc, content, heroImage, isPublished, isFeatured
+      }
+    });
+  } else {
+    await prisma.package.update({
+      where: { id },
+      data: {
+        title, destinationId: destinationId || null, duration, priceFrom, shortDesc, content, heroImage, isPublished, isFeatured
+      }
+    });
+  }
+
+  revalidatePath('/admin/packages');
+  revalidatePath('/packages');
+  redirect('/admin/packages');
+}
+
+export async function deletePackage(id: string) {
+  await prisma.package.delete({ where: { id } });
+  revalidatePath('/admin/packages');
+  revalidatePath('/packages');
+}
