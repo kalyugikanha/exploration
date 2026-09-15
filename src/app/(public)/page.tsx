@@ -1,4 +1,4 @@
-﻿import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import TestimonialSection from '@/components/ui/TestimonialSection';
@@ -40,20 +40,15 @@ export default async function HomePage() {
       <section className="relative w-full h-[90vh] min-h-[600px] overflow-hidden">
         <Image src={data.heroImage} alt="Hero" fill priority className="object-cover" />
         <div className="absolute inset-0 bg-black/40 z-10"></div>
-        <div className={`relative z-20 h-full flex flex-col justify-center px-6 md:px-16 ${alignClass}`}>
-          <div className="max-w-4xl" data-aos="fade-up">
+        <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-16">
+          <div className={`max-w-4xl w-full ${data.heroAlign === 'left' ? 'mr-auto text-left' : data.heroAlign === 'right' ? 'ml-auto text-right' : 'mx-auto text-center'}`} data-aos="fade-up">
             <span className="text-white/90 font-semibold tracking-[0.2em] uppercase text-sm mb-4 block">Exploration Tours</span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-display leading-[1.1]">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-display leading-[1.1] drop-shadow-lg">
               {data.heroTitle}
             </h1>
-            <p className="text-lg md:text-2xl text-white/90 mb-10 max-w-2xl font-light">
+            <p className={`text-lg md:text-2xl text-white/90 max-w-2xl font-light drop-shadow-md ${data.heroAlign === 'center' ? 'mx-auto' : ''}`}>
               {data.heroSubtitle}
             </p>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-              <Link href="/contact" className="bg-[#045a94] hover:bg-white text-white hover:text-[#045a94] px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl shadow-lg">
-                Plan Your Trip
-              </Link>
-            </div>
           </div>
         </div>
       </section>
