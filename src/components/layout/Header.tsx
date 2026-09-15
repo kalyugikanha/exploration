@@ -23,7 +23,7 @@ export default function Header() {
         {/* Side Floating Logo (Sticky & Responsive) */}
         <div className="absolute left-0 top-3 md:top-4 pointer-events-auto z-[101]">
           <Link href="/">
-             <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-r-full bg-[#045a94] flex items-center justify-center shadow-[10px_5px_20px_rgba(4,90,148,0.3)] transition-all duration-500 hover:pr-4 cursor-pointer">
+             <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-[#02304f] flex items-center justify-center shadow-[0_10px_30px_rgba(2,48,79,0.5)] border-2 border-white/20 transition-all duration-500 hover:scale-105 cursor-pointer ml-4">
                 <Image src="/logo-white.png" alt="Exploration Tours Logo" width={60} height={60} className="object-contain w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14" />
              </div>
           </Link>
