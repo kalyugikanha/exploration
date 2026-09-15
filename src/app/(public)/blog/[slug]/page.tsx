@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { Calendar, User, Facebook, Twitter, Linkedin, MessageCircle, ChevronRight } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await prisma.blogPost.findUnique({ where: { slug: params.slug } });
+  const post = await prisma.blogPost.findUnique({ include: { comments: { where: { isApproved: true }, orderBy: { createdAt: 'desc' } } },  where: { slug: params.slug } });
   if (!post) return { title: 'Post Not Found' };
   return {
     title: `${post.seoTitle || post.title} | Exploration Tours`,
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function BlogDetailPage({ params }: { params: { slug: string } }) {
-  const post = await prisma.blogPost.findUnique({ where: { slug: params.slug } });
+  const post = await prisma.blogPost.findUnique({ include: { comments: { where: { isApproved: true }, orderBy: { createdAt: 'desc' } } },  where: { slug: params.slug } });
 
   if (!post || !post.isPublished) notFound();
 
@@ -136,35 +136,37 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
               </div>
             )}
 
+                        {/* DISPLAY COMMENTS */}
+            {post.comments && post.comments.length > 0 && (
+              <div className="mb-16 bg-slate-50 p-8 rounded-3xl">
+                <h3 className="text-2xl font-display font-bold text-slate-900 mb-8 border-b border-slate-200 pb-4">
+                  {post.comments.length} Comments
+                </h3>
+                <div className="space-y-6">
+                  {post.comments.map(c => (
+                    <div key={c.id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                      <div className="flex items-center gap-4 mb-3">
+                        <div className="w-10 h-10 bg-[#045a94]/10 text-[#045a94] rounded-full flex items-center justify-center font-bold">
+                          {c.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <p className="font-bold text-slate-900">{c.name}</p>
+                          <p className="text-xs text-slate-500">{new Date(c.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                        </div>
+                      </div>
+                      <p className="text-slate-600 text-sm whitespace-pre-wrap">{c.content}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             {/* LEAVE A REPLY FORM */}
             <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-display font-bold text-slate-900 mb-2">Leave a Reply</h3>
                 <p className="text-slate-500 text-sm">Your email address will not be published. Required fields are marked *</p>
               </div>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">Name *</label>
-                    <input type="text" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-600" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">Email *</label>
-                    <input type="email" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-600" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Website</label>
-                  <input type="url" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-600" />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Comment *</label>
-                  <textarea rows={5} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-600"></textarea>
-                </div>
-                <button type="button" className="bg-brand-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-brand-700 transition-colors shadow-lg">
-                  Submit Comment
-                </button>
-              </form>
+              <CommentForm postId={post.id} />
             </div>
 
           </div>

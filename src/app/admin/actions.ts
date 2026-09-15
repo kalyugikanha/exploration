@@ -145,3 +145,137 @@ export async function deletePackage(id: string) {
   revalidatePath('/admin/packages');
   revalidatePath('/packages');
 }
+// --- BLOG POST ACTIONS ---
+export async function saveBlogPost(formData: FormData) {
+  const id = formData.get('id') as string;
+  const title = formData.get('title') as string;
+  const category = formData.get('category') as string;
+  const introText = formData.get('introText') as string;
+  const content = formData.get('content') as string;
+  const featuredImage = formData.get('featuredImage') as string;
+  const isPublished = formData.get('isPublished') === 'on';
+
+  let slug = slugify(title);
+
+  if (!id || id === 'new') {
+    const existing = await prisma.blogPost.findUnique({ where: { slug } });
+    if (existing) slug = `${slug}-${Date.now()}`;
+    
+    await prisma.blogPost.create({
+      data: {
+        title, slug, category, introText, content, featuredImage, isPublished,
+        publishedAt: isPublished ? new Date() : null
+      }
+    });
+  } else {
+    await prisma.blogPost.update({
+      where: { id },
+      data: {
+        title, category, introText, content, featuredImage, isPublished,
+        publishedAt: isPublished ? new Date() : null
+      }
+    });
+  }
+
+  revalidatePath('/admin/blog');
+  revalidatePath('/blog');
+  redirect('/admin/blog');
+}
+
+export async function deleteBlogPost(id: string) {
+  await prisma.comment.deleteMany({ where: { postId: id } }); // cascade delete comments
+  await prisma.blogPost.delete({ where: { id } });
+  revalidatePath('/admin/blog');
+  revalidatePath('/blog');
+}
+
+// --- COMMENT ACTIONS ---
+export async function submitComment(formData: FormData) {
+  const postId = formData.get('postId') as string;
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const content = formData.get('content') as string;
+  
+  await prisma.comment.create({
+    data: { postId, name, email, content }
+  });
+  
+  // Note: Doesn't revalidate immediately since it's pending approval
+  return { success: true };
+}
+
+export async function approveComment(id: string) {
+  await prisma.comment.update({
+    where: { id },
+    data: { isApproved: true }
+  });
+  revalidatePath('/admin/comments');
+  revalidatePath('/blog');
+}
+
+export async function deleteComment(id: string) {
+  await prisma.comment.delete({ where: { id } });
+  revalidatePath('/admin/comments');
+  revalidatePath('/blog');
+}
+
+// --- TESTIMONIAL ACTIONS ---
+export async function saveTestimonial(formData: FormData) {
+  const id = formData.get('id') as string;
+  const customerName = formData.get('customerName') as string;
+  const review = formData.get('review') as string;
+  const rating = parseInt(formData.get('rating') as string) || 5;
+  const isActive = formData.get('isActive') === 'on';
+  const image = formData.get('image') as string;
+
+  if (!id || id === 'new') {
+    await prisma.testimonial.create({
+      data: { customerName, review, rating, isActive, image }
+    });
+  } else {
+    await prisma.testimonial.update({
+      where: { id },
+      data: { customerName, review, rating, isActive, image }
+    });
+  }
+
+  revalidatePath('/admin/testimonials');
+  revalidatePath('/');
+  redirect('/admin/testimonials');
+}
+
+export async function deleteTestimonial(id: string) {
+  await prisma.testimonial.delete({ where: { id } });
+  revalidatePath('/admin/testimonials');
+  revalidatePath('/');
+}
+
+// --- FAQ ACTIONS ---
+export async function saveFaq(formData: FormData) {
+  const id = formData.get('id') as string;
+  const question = formData.get('question') as string;
+  const answer = formData.get('answer') as string;
+  const order = parseInt(formData.get('order') as string) || 0;
+  const isActive = formData.get('isActive') === 'on';
+
+  if (!id || id === 'new') {
+    await prisma.faq.create({
+      data: { question, answer, order, isActive }
+    });
+  } else {
+    await prisma.faq.update({
+      where: { id },
+      data: { question, answer, order, isActive }
+    });
+  }
+
+  revalidatePath('/admin/faqs');
+  revalidatePath('/about');
+  redirect('/admin/faqs');
+}
+
+export async function deleteFaq(id: string) {
+  await prisma.faq.delete({ where: { id } });
+  revalidatePath('/admin/faqs');
+  revalidatePath('/about');
+}

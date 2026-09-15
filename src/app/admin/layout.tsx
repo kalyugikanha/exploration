@@ -44,7 +44,16 @@ export default async function AdminLayout({ children }: { children: ReactNode })
               <Package className="w-4 h-4" /> Packages
             </Link>
             <Link href="/admin/blog" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm">
-              <FileText className="w-4 h-4" /> Blog / Webhook
+              <FileText className="w-4 h-4" /> Blog
+            </Link>
+            <Link href="/admin/comments" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm">
+              <FileText className="w-4 h-4" /> Comments
+            </Link>
+            <Link href="/admin/testimonials" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm">
+              <FileText className="w-4 h-4" /> Testimonials
+            </Link>
+            <Link href="/admin/faqs" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm">
+              <FileText className="w-4 h-4" /> FAQs
             </Link>
 
             <div className="pt-4 pb-2">
