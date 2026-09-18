@@ -24,15 +24,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
               <Users className="w-4 h-4" /> Leads
             </Link>
             
-            <div className="pt-4 pb-2">
-              <p className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Website Pages</p>
-            </div>
-            <Link href="/admin/pages/home" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm ml-2 border-l-2 border-transparent hover:border-brand-500">
-              <FileCode className="w-4 h-4" /> Home Page
-            </Link>
-            <Link href="/admin/pages/about" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm ml-2 border-l-2 border-transparent hover:border-brand-500">
-              <FileCode className="w-4 h-4" /> About Page
-            </Link>
+
 
             <div className="pt-4 pb-2">
               <p className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Content Modules</p>
