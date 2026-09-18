@@ -1,4 +1,4 @@
-﻿import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { CheckCircle, Trash2 } from 'lucide-react';
 import { approveComment, deleteComment } from '../actions';
 

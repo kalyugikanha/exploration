@@ -1,4 +1,4 @@
-﻿export default function TrustStrip() {
+export default function TrustStrip() {
   return (
     <div className="w-full bg-[#045a94] text-white py-4 px-4 overflow-hidden border-b border-[#03426e]">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 text-sm md:text-base font-medium tracking-wide text-center">

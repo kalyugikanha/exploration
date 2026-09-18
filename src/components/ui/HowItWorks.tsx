@@ -1,4 +1,4 @@
-﻿export default function HowItWorks() {
+export default function HowItWorks() {
   const steps = [
     { num: '01', title: 'Tell Us Your Ideas', desc: 'Share your destination, dates, interests and preferences.' },
     { num: '02', title: 'We Design Your Journey', desc: 'Our experts create a personalised itinerary around you.' },

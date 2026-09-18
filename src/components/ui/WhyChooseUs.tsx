@@ -1,4 +1,4 @@
-﻿import { Award, HeartHandshake, Star, HeadphonesIcon } from 'lucide-react';
+import { Award, HeartHandshake, Star, HeadphonesIcon } from 'lucide-react';
 
 export default function WhyChooseUs() {
   const features = [

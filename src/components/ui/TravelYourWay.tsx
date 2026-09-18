@@ -1,4 +1,4 @@
-﻿import { Gem, Users, Heart, Compass, Briefcase, PlaneTakeoff } from 'lucide-react';
+import { Gem, Users, Heart, Compass, Briefcase, PlaneTakeoff } from 'lucide-react';
 
 export default function TravelYourWay() {
   const categories = [
