@@ -30,12 +30,12 @@ export default async function AdminFaqsList() {
                 <td className="p-4">{item.order}</td>
                 <td className="p-4 font-medium">{item.question}</td>
                 <td className="p-4">
-                  <span className={px-2 py-1 rounded text-xs font-bold }>
+                  <span className={`px-2 py-1 rounded text-xs font-bold ${item.isActive ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-600'}`}>
                     {item.isActive ? 'Active' : 'Hidden'}
                   </span>
                 </td>
                 <td className="p-4 flex gap-2">
-                  <Link href={/admin/faqs/} className="p-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100"><Edit className="w-4 h-4" /></Link>
+                  <Link href={`/admin/faqs/${item.id}`} className="p-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100"><Edit className="w-4 h-4" /></Link>
                   <form action={deleteFaq.bind(null, item.id)}>
                     <button type="submit" className="p-2 bg-red-50 text-red-600 rounded hover:bg-red-100"><Trash2 className="w-4 h-4" /></button>
                   </form>

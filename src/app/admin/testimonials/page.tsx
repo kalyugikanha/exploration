@@ -33,7 +33,7 @@ export default async function AdminTestimonialsList() {
                 </td>
                 <td className="p-4 text-sm text-slate-600 max-w-xs truncate">{item.review}</td>
                 <td className="p-4 flex gap-2">
-                  <Link href={/admin/testimonials/} className="p-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100"><Edit className="w-4 h-4" /></Link>
+                  <Link href={`/admin/testimonials/${item.id}`} className="p-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100"><Edit className="w-4 h-4" /></Link>
                   <form action={deleteTestimonial.bind(null, item.id)}>
                     <button type="submit" className="p-2 bg-red-50 text-red-600 rounded hover:bg-red-100"><Trash2 className="w-4 h-4" /></button>
                   </form>

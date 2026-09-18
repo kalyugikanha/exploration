@@ -32,7 +32,7 @@ export default async function AdminCommentsList() {
                 <td className="p-4 text-sm text-slate-600">{comment.post.title}</td>
                 <td className="p-4 text-sm max-w-xs truncate" title={comment.content}>{comment.content}</td>
                 <td className="p-4">
-                  <span className={px-2 py-1 rounded text-xs font-bold }>
+                  <span className={`px-2 py-1 rounded text-xs font-bold ${comment.isApproved ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
                     {comment.isApproved ? 'Approved' : 'Pending'}
                   </span>
                 </td>
