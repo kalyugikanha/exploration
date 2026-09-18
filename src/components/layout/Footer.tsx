@@ -1,8 +1,18 @@
+import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Instagram, Youtube, Twitter, Send, Plane, ArrowRight } from 'lucide-react';
 
-export default function Footer() {
+export default async function Footer() {
+  const globalSetting = await prisma.setting.findUnique({ where: { key: 'global_settings' } });
+  const global = globalSetting ? JSON.parse(globalSetting.value) : {
+    phone: '+91 99999 99999',
+    email: 'info@explorationtours.com',
+    address: 'Jaipur, Rajasthan, India',
+    footerAbout: 'Exploration Tours believes that travel should be a personal experience, not a mass-produced product. We curate deeply personalised journeys around the world, designed exclusively around your style, pace, and passions.',
+    facebook: '#', instagram: '#', twitter: '#',
+    copyright: 'Exploration Tours. All rights reserved.'
+  };
   return (
     <footer className="bg-[#f8fafc] text-slate-600 pt-20 relative overflow-hidden">
       
@@ -28,10 +38,10 @@ export default function Footer() {
               <a href="https://www.facebook.com/people/Exploration-Tours/100089478369935" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-blue-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,99,235,0.3)] transition-all duration-300">
                 <Facebook className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
-              <a href="https://www.instagram.com/explorationtourss/" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-pink-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(219,39,119,0.3)] transition-all duration-300">
+              <a href="{global.instagram || "#"}" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-pink-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(219,39,119,0.3)] transition-all duration-300">
                 <Instagram className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
-              <a href="https://www.linkedin.com/in/exploration-tours-735" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-blue-700 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(29,78,216,0.3)] transition-all duration-300">
+              <a href="{global.twitter || "#"}" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-blue-700 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(29,78,216,0.3)] transition-all duration-300">
                 <svg className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
               <a href="#" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-red-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(220,38,38,0.3)] transition-all duration-300">
@@ -106,7 +116,7 @@ export default function Footer() {
       <div className="relative z-10 bg-white py-6 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-400 text-sm font-medium tracking-wide">
-            &copy; {new Date().getFullYear()} Exploration Tours. All rights reserved.
+            &copy; {new Date().getFullYear()} {global.copyright || "Exploration Tours. All rights reserved."}
           </p>
           
           <div className="flex flex-wrap gap-4 md:gap-6 text-sm text-slate-400 font-medium">
