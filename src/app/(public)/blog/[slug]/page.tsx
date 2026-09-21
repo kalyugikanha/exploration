@@ -1,3 +1,4 @@
+import CommentForm from '@/components/ui/CommentForm';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
