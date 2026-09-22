@@ -8,42 +8,83 @@ datasource db {
 }
 
 model Destination {
-  id          String    @id @default(cuid())
-  slug        String    @unique
-  name        String
-  region      String
-  country     String?
-  shortDesc   String?
-  content     String?   @db.Text
-  heroImage   String?
-  gallery     String[]  @default([])
-  isFeatured  Boolean   @default(false)
-  bestTime    String?
-  whyVisit    String?   @db.Text
-  seoTitle    String?
-  seoDesc     String?
-  isPublished Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  packages    Package[]
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  name          String
+  region        String
+  country       String?
+  shortDesc     String?
+  content       String?        @db.Text
+  heroImage     String?
+  gallery       String[]       @default([])
+  isFeatured    Boolean        @default(false)
+  bestTime      String?
+  whyVisit      String?        @db.Text
+  seoTitle      String?
+  seoDesc       String?
+  isPublished   Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  packages      Package[]
+  itineraries   ItineraryDay[]
 }
 
 model Package {
-  id            String       @id @default(cuid())
-  slug          String       @unique
+  id            String         @id @default(cuid())
+  slug          String         @unique
   title         String
   destinationId String?
-  destination   Destination? @relation(fields: [destinationId], references: [id])
+  destination   Destination?   @relation(fields: [destinationId], references: [id])
   duration      String?
-  priceFrom     Float?
   shortDesc     String?
-  content       String?      @db.Text
+  content       String?        @db.Text
   heroImage     String?
-  gallery       String[]     @default([])
-  isFeatured    Boolean      @default(false)
+  gallery       String[]       @default([])
+  isFeatured    Boolean        @default(false)
   seoTitle      String?
   seoDesc       String?
-  isPublished   Boolean      @default(false)
+  isPublished   Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  itineraries   ItineraryDay[]
+}
+
+model Cruise {
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  title         String
+  region        String?
+  duration      String?
+  shortDesc     String?
+  content       String?        @db.Text
+  heroImage     String?
+  gallery       String[]       @default([])
+  isFeatured    Boolean        @default(false)
+  seoTitle      String?
+  seoDesc       String?
+  isPublished   Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  itineraries   ItineraryDay[]
+}
+
+model ItineraryDay {
+  id            String       @id @default(cuid())
+  dayNumber     Int
+  title         String       // e.g. "Day 1 - Morning" or "Day 1 - Arrival"
+  timeOfDay     String?      // e.g. "Day", "Night"
+  description   String?      @db.Text // Can hold bullet points formatted as markdown/html
+  images        String[]     @default([]) // 3-4 images
+
+  destinationId String?
+  destination   Destination? @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  
+  packageId     String?
+  package       Package?     @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  cruiseId      String?
+  cruise        Cruise?      @relation(fields: [cruiseId], references: [id], onDelete: Cascade)
+  
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 }
@@ -153,7 +194,7 @@ model Setting {
 model Comment {
   id          String   @id @default(cuid())
   postId      String
-  post        BlogPost @relation(fields: [postId], references: [id])
+  post        BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
   name        String
   email       String
   content     String   @db.Text

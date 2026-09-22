@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+﻿import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { deleteBlogPost } from '../actions';
@@ -10,7 +10,7 @@ export default async function AdminBlogList() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Manage Blogs</h1>
-        <Link href="/admin/blog/new" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-bold flex items-center gap-2">
+        <Link href="/admin/blog/new" className="bg-brand-700 hover:bg-brand-800 text-white px-4 py-2 rounded font-bold flex items-center gap-2">
           <Plus className="w-4 h-4" /> Add Blog
         </Link>
       </div>
@@ -41,7 +41,7 @@ export default async function AdminBlogList() {
                   </span>
                 </td>
                 <td className="p-4 flex gap-2">
-                  <Link href={`/admin/blog/${post.id}`} className="p-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100"><Edit className="w-4 h-4" /></Link>
+                  <Link href={`/admin/blog/${post.id}`} className="p-2 bg-brand-50 text-brand-700 rounded hover:bg-brand-100"><Edit className="w-4 h-4" /></Link>
                   <form action={deleteBlogPost.bind(null, post.id)}>
                     <button type="submit" className="p-2 bg-red-50 text-red-600 rounded hover:bg-red-100"><Trash2 className="w-4 h-4" /></button>
                   </form>
@@ -54,3 +54,4 @@ export default async function AdminBlogList() {
     </div>
   );
 }
+

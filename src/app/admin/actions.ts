@@ -1,4 +1,4 @@
-'use server';
+﻿'use server';
 
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
@@ -279,3 +279,20 @@ export async function deleteFaq(id: string) {
   revalidatePath('/admin/faqs');
   revalidatePath('/about');
 }
+
+export async function submitLead(formData: FormData) {
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const phone = formData.get('phone') as string;
+  const destination = formData.get('destination') as string;
+  const message = formData.get('message') as string;
+
+  if (!name || !email || !phone || !message) throw new Error('Missing required fields');
+
+  await prisma.lead.create({
+    data: {
+      name, email, phone, destination, message
+    }
+  });
+}
+

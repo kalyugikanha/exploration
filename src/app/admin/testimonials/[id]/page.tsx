@@ -25,7 +25,7 @@ export default async function AdminTestimonialForm({ params }: { params: { id: s
           <label htmlFor="isActive" className="font-semibold text-sm">Active</label>
         </div>
 
-        <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700">Save Testimonial</button>
+        <button type="submit" className="bg-brand-700 text-white px-6 py-2 rounded font-bold hover:bg-brand-800">Save Testimonial</button>
       </form>
     </div>
   );

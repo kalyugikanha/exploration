@@ -12,7 +12,7 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
 
   // Basic styling mapping for status tags
   const statusColors: Record<string, string> = {
-    new: 'bg-blue-100 text-blue-800',
+    new: 'bg-brand-100 text-brand-800',
     contacted: 'bg-yellow-100 text-yellow-800',
     'follow-up': 'bg-orange-100 text-orange-800',
     qualified: 'bg-purple-100 text-purple-800',

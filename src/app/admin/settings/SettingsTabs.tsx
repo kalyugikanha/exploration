@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { savePageSettings } from '../actions';
@@ -36,7 +36,7 @@ export default function SettingsTabs({ initialData }: { initialData: Record<stri
             key={tab.id}
             type="button"
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-4 text-sm font-bold whitespace-nowrap ${activeTab === tab.id ? 'border-b-2 border-blue-600 text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`px-6 py-4 text-sm font-bold whitespace-nowrap ${activeTab === tab.id ? 'border-b-2 border-brand-700 text-brand-700' : 'text-slate-500 hover:text-slate-700'}`}
           >
             {tab.label}
           </button>
@@ -105,7 +105,7 @@ export default function SettingsTabs({ initialData }: { initialData: Record<stri
           )}
 
           <div className="pt-6 border-t">
-            <button type="submit" disabled={isSaving} className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 disabled:opacity-50">
+            <button type="submit" disabled={isSaving} className="bg-brand-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-brand-800 disabled:opacity-50">
               {isSaving ? 'Saving...' : 'Save Settings'}
             </button>
           </div>

@@ -86,6 +86,7 @@ export default async function PackageForm({ params }: { params: { id: string } }
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
+              <p className="text-xs text-gray-400 mb-2">Recommended: 15-30 words (approx. 100-150 characters).</p>
           <textarea 
             name="shortDesc" 
             rows={3}

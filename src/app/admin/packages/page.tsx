@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+﻿import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { Plus, Pencil } from 'lucide-react';
 import DeleteButton from '@/components/admin/DeleteButton';
@@ -50,11 +50,11 @@ export default async function PackagesAdmin() {
                       {pkg.isPublished ? 'Published' : 'Draft'}
                     </span>
                     {pkg.isFeatured && (
-                      <span className="ml-2 px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">Featured</span>
+                      <span className="ml-2 px-2 py-1 rounded-full text-xs font-semibold bg-brand-100 text-brand-800">Featured</span>
                     )}
                   </td>
                   <td className="p-4 flex gap-2">
-                    <Link href={`/admin/packages/${pkg.id}`} className="p-2 text-gray-600 hover:text-[#045a94] bg-gray-100 hover:bg-blue-50 rounded">
+                    <Link href={`/admin/packages/${pkg.id}`} className="p-2 text-gray-600 hover:text-[#045a94] bg-gray-100 hover:bg-brand-50 rounded">
                       <Pencil className="w-4 h-4" />
                     </Link>
                     <DeleteButton action={deletePackage} id={pkg.id} />

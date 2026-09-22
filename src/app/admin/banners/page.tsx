@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+﻿import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { deleteBanner } from '../actions';
 import Image from 'next/image';
@@ -50,7 +50,7 @@ export default async function BannersPage() {
                   </span>
                 </td>
                 <td className="p-4 text-right space-x-4">
-                  <Link href={`/admin/banners/${banner.id}`} className="text-blue-600 hover:underline">Edit</Link>
+                  <Link href={`/admin/banners/${banner.id}`} className="text-brand-700 hover:underline">Edit</Link>
                   <form action={deleteBanner.bind(null, banner.id)} className="inline">
                     <DeleteButton />
                   </form>

@@ -23,7 +23,7 @@ export default function TravelYourWay() {
           {categories.map((cat, i) => (
             <div key={i} data-aos="fade-up" data-aos-delay={i * 100} 
                  className="group cursor-pointer p-8 rounded-3xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-[0_20px_40px_rgba(4,90,148,0.08)] transition-all duration-300 hover:-translate-y-1">
-              <div className="w-14 h-14 rounded-2xl bg-blue-100/50 flex items-center justify-center text-[#045a94] mb-6 group-hover:scale-110 group-hover:bg-[#045a94] group-hover:text-white transition-all duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-brand-100/50 flex items-center justify-center text-[#045a94] mb-6 group-hover:scale-110 group-hover:bg-[#045a94] group-hover:text-white transition-all duration-300">
                 <cat.icon className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-2 font-display">{cat.title}</h3>

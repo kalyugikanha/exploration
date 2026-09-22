@@ -21,7 +21,7 @@ export default function HowItWorks() {
             <div key={i} data-aos="fade-up" data-aos-delay={i * 150} className="relative group">
               {/* Connector Line (hidden on mobile/last item) */}
               {i !== steps.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-1/2 w-full h-[1px] bg-gradient-to-r from-blue-500/50 to-transparent"></div>
+                <div className="hidden lg:block absolute top-12 left-1/2 w-full h-[1px] bg-gradient-to-r from-brand-600/50 to-transparent"></div>
               )}
               
               <div className="flex flex-col items-center text-center px-4">

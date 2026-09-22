@@ -1,4 +1,4 @@
-import Image from 'next/image';
+﻿import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import TestimonialSection from '@/components/ui/TestimonialSection';
@@ -144,7 +144,7 @@ export default async function HomePage() {
               <span className="text-[#045a94] font-bold tracking-widest uppercase text-sm mb-2 block">Travel Inspiration</span>
               <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900">Latest From Our Blog</h2>
             </div>
-            <Link href="/blog" className="inline-flex items-center gap-2 text-[#045a94] font-bold hover:bg-blue-50 px-6 py-3 rounded-full transition-colors">
+            <Link href="/blog" className="inline-flex items-center gap-2 text-[#045a94] font-bold hover:bg-brand-50 px-6 py-3 rounded-full transition-colors">
               Read All Articles <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -171,7 +171,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1920')] bg-cover bg-center"></div>
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10" data-aos="zoom-in">
           <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Ready to Start Planning?</h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto font-light">
+          <p className="text-xl text-brand-100 mb-10 max-w-2xl mx-auto font-light">
             Contact our travel experts today and let us craft a bespoke itinerary tailored perfectly to your preferences.
           </p>
           <Link href="/contact" className="inline-flex items-center justify-center bg-white text-[#045a94] hover:bg-slate-50 px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:-translate-y-1 transition-all duration-300">
@@ -183,3 +183,4 @@ export default async function HomePage() {
     </main>
   );
 }
+

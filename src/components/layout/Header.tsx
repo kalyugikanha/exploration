@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -12,6 +12,7 @@ export default function Header() {
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Destinations', path: '/destinations' },
+      { name: 'Cruises', path: '/cruises' },
     { name: 'Packages', path: '/packages' },
     { name: 'Blog', path: '/blog' },
   ];
@@ -35,7 +36,7 @@ export default function Header() {
           {/* Navigation Links - Desktop */}
           <nav className="hidden md:flex items-center gap-1 font-medium text-sm text-slate-600">
             {navItems.map((item) => (
-              <Link key={item.name} href={item.path} className="group relative px-5 py-2.5 rounded-full hover:text-[#045a94] hover:bg-blue-50/50 transition-all duration-300 ease-in-out font-bold overflow-hidden">
+              <Link key={item.name} href={item.path} className="group relative px-5 py-2.5 rounded-full hover:text-[#045a94] hover:bg-brand-50/50 transition-all duration-300 ease-in-out font-bold overflow-hidden">
                 <span className="relative z-10">{item.name}</span>
                 <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#045a94] transition-all duration-300 group-hover:w-3/4 opacity-0 group-hover:opacity-100 rounded-full"></span>
               </Link>
@@ -80,7 +81,7 @@ export default function Header() {
                   key={item.name} 
                   href={item.path} 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-3 text-lg font-bold text-slate-700 hover:text-[#045a94] hover:bg-blue-50 rounded-lg transition-colors border-b border-slate-100 last:border-none"
+                  className="px-4 py-3 text-lg font-bold text-slate-700 hover:text-[#045a94] hover:bg-brand-50 rounded-lg transition-colors border-b border-slate-100 last:border-none"
                 >
                   {item.name}
                 </Link>
@@ -101,3 +102,4 @@ export default function Header() {
     </>
   );
 }
+

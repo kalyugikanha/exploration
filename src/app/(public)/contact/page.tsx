@@ -1,6 +1,6 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
-import ContactForm from '@/components/ui/ContactForm'; // Assuming we have one, otherwise we'll just put raw form
+import ContactForm from '@/components/ui/ContactForm';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Contact Us | Exploration Tours' };
@@ -28,23 +28,26 @@ export default async function ContactPage() {
           {/* Contact Details */}
           <div className="space-y-8">
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex gap-4">
-              <div className="w-12 h-12 bg-blue-50 text-[#045a94] rounded-full flex items-center justify-center shrink-0"><Phone /></div>
+              <div className="w-12 h-12 bg-brand-50 text-brand-700 rounded-full flex items-center justify-center shrink-0"><Phone /></div>
               <div><h3 className="text-xl font-bold mb-1">Phone</h3><p className="text-slate-600">{global.phone}</p></div>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex gap-4">
-              <div className="w-12 h-12 bg-blue-50 text-[#045a94] rounded-full flex items-center justify-center shrink-0"><Mail /></div>
+              <div className="w-12 h-12 bg-brand-50 text-brand-700 rounded-full flex items-center justify-center shrink-0"><Mail /></div>
               <div><h3 className="text-xl font-bold mb-1">Email</h3><p className="text-slate-600">{global.email}</p></div>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex gap-4">
-              <div className="w-12 h-12 bg-blue-50 text-[#045a94] rounded-full flex items-center justify-center shrink-0"><MapPin /></div>
+              <div className="w-12 h-12 bg-brand-50 text-brand-700 rounded-full flex items-center justify-center shrink-0"><MapPin /></div>
               <div><h3 className="text-xl font-bold mb-1">Office Address</h3><p className="text-slate-600">{global.address}</p></div>
             </div>
           </div>
           
-          {/* Contact Form OR Map */}
-          <div className="bg-white p-2 rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-[500px]">
-            <iframe src={data.mapUrl} width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"></iframe>
-          </div>
+          {/* Contact Form */}
+          <ContactForm />
+        </div>
+        
+        {/* Map */}
+        <div className="mt-12 bg-white p-2 rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-[500px]">
+          <iframe src={data.mapUrl} width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"></iframe>
         </div>
       </div>
     </main>

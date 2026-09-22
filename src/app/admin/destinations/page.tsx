@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+﻿import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { deleteDestination } from '../actions';
 import DeleteButton from '@/components/admin/DeleteButton';
@@ -45,7 +45,7 @@ export default async function DestinationsPage() {
                 </td>
                 <td className="p-4 text-gray-600">{dest.isFeatured ? 'Yes' : 'No'}</td>
                 <td className="p-4 text-right space-x-4">
-                  <Link href={`/admin/destinations/${dest.id}`} className="text-blue-600 hover:underline">Edit</Link>
+                  <Link href={`/admin/destinations/${dest.id}`} className="text-brand-700 hover:underline">Edit</Link>
                   <form action={deleteDestination.bind(null, dest.id)} className="inline">
                     <DeleteButton />
                   </form>

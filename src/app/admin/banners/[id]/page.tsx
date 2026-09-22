@@ -31,10 +31,10 @@ export default async function BannerFormPage({ params }: { params: { id: string 
             <input type="text" name="subtitle" defaultValue={banner?.subtitle || ''} className="w-full px-4 py-2 border rounded-md outline-none focus:ring-2 focus:ring-brand-500" placeholder="21 years of crafting unforgettable experiences..." />
           </div>
 
-          <div className="bg-blue-50 border border-blue-100 p-4 rounded-lg">
+          <div className="bg-brand-50 border border-brand-100 p-4 rounded-lg">
             <label className="block text-sm font-medium text-gray-900 mb-1">Background Image URL *</label>
             <input required type="text" name="image" defaultValue={banner?.image || ''} className="w-full px-4 py-2 border rounded-md outline-none focus:ring-2 focus:ring-brand-500 bg-white" placeholder="/images/hero-banner.jpg or https://..." />
-            <p className="mt-2 text-xs text-blue-800 font-medium">
+            <p className="mt-2 text-xs text-brand-800 font-medium">
               💡 Recommended Size: 1920x1080px (16:9 ratio). Keep the main subject centered so it crops perfectly on mobile devices.
             </p>
           </div>
