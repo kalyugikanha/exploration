@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 import { useState } from 'react';
-import { saveDestination } from '../../actions';
+import { saveDestination } from '../actions';
 import { Plus, Trash2 } from 'lucide-react';
 
 export default function DestinationForm({ dest, isNew }: { dest: any, isNew: boolean }) {
@@ -131,7 +131,7 @@ export default function DestinationForm({ dest, isNew }: { dest: any, isNew: boo
 
               <div className="mb-4">
                 <label className="block text-xs font-bold text-slate-700 mb-1">Description (Bullet Points)</label>
-                <textarea value={day.description} onChange={e => updateItinerary(idx, 'description', e.target.value)} rows={3} className="w-full px-3 py-1.5 border border-slate-200 rounded outline-none" placeholder="Use • or - for bullets"></textarea>
+                <textarea value={day.description} onChange={e => updateItinerary(idx, 'description', e.target.value)} rows={3} className="w-full px-3 py-1.5 border border-slate-200 rounded outline-none" placeholder="Use â€¢ or - for bullets"></textarea>
                 <p className="text-xs text-slate-400 mt-1">Recommended length: 30-50 words per day.</p>
               </div>
 
@@ -173,3 +173,4 @@ export default function DestinationForm({ dest, isNew }: { dest: any, isNew: boo
     </form>
   );
 }
+
