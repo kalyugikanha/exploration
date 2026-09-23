@@ -1,4 +1,4 @@
-﻿import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Instagram, Youtube, Twitter, Send, Plane, ArrowRight } from 'lucide-react';
@@ -85,7 +85,7 @@ export default async function Footer() {
             <ul className="space-y-4 text-sm font-medium">
               {['Destinations', 'Packages', 'About Us', 'Blog', 'Contact Us'].map((item) => (
                 <li key={item}>
-                  <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="group flex items-center text-slate-500 hover:text-[#045a94] transition-colors">
+                  <Link href={item === 'About Us' ? '/about' : item === 'Contact Us' ? '/contact' : '/destinations'} className="group flex items-center text-slate-500 hover:text-[#045a94] transition-colors">
                     <ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                     <span className="transform group-hover:translate-x-1 transition-transform duration-300">{item}</span>
                   </Link>

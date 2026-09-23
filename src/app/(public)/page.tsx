@@ -1,4 +1,4 @@
-﻿import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import TestimonialSection from '@/components/ui/TestimonialSection';
@@ -104,11 +104,7 @@ export default async function HomePage() {
               <div key={pkg.id} data-aos="fade-up" data-aos-delay={i * 100} className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                 <div className="relative h-60 w-full overflow-hidden">
                   <Image src={pkg.heroImage || '/placeholder.jpg'} alt={pkg.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                  {pkg.priceFrom > 0 && (
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full text-sm font-bold text-slate-900 shadow-sm">
-                      From ${pkg.priceFrom}
-                    </div>
-                  )}
+                  
                 </div>
                 <div className="p-6 md:p-8">
                   <div className="flex items-center gap-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">

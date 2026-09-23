@@ -1,4 +1,4 @@
-﻿import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { deleteBlogPost } from '../actions';

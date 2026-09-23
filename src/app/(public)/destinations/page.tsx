@@ -1,4 +1,4 @@
-﻿import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -20,6 +20,7 @@ export default async function DestinationsPage() {
   });
 
   const topSpots = destinations.filter(d => d._count.packages > 0).slice(0, 4);
+  const safeDest = JSON.parse(JSON.stringify(destinations));
 
   return (
     <main className="w-full bg-slate-50 min-h-screen">
@@ -45,7 +46,7 @@ export default async function DestinationsPage() {
               {topSpots.map((spot, idx) => (
                 <Link 
                   key={spot.id} 
-                  href={/destinations/}
+                  href={`/destinations/${spot.slug}`}
                   className="bg-white rounded-2xl p-4 flex items-center justify-between border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-200 transition-all group"
                   data-aos="zoom-in"
                   data-aos-delay={idx * 50}
@@ -81,7 +82,7 @@ export default async function DestinationsPage() {
             </p>
           </div>
 
-          <DestinationsFilter destinations={destinations} />
+          <DestinationsFilter destinations={safeDest} />
         </div>
       </section>
 

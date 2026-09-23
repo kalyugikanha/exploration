@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState } from 'react';
 import { saveDestination } from '../actions';
 import { Plus, Trash2 } from 'lucide-react';

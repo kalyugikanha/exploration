@@ -1,4 +1,4 @@
-﻿import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { deleteDestination } from '../actions';
 import DeleteButton from '@/components/admin/DeleteButton';

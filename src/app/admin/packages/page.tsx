@@ -1,4 +1,4 @@
-﻿import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { Plus, Pencil } from 'lucide-react';
 import DeleteButton from '@/components/admin/DeleteButton';
