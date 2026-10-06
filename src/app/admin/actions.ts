@@ -286,12 +286,13 @@ export async function submitLead(formData: FormData) {
   const phone = formData.get('phone') as string;
   const destination = formData.get('destination') as string;
   const message = formData.get('message') as string;
+  const numTravellers = formData.get('numTravellers') as string;
 
   if (!name || !email || !phone || !message) throw new Error('Missing required fields');
 
   await prisma.lead.create({
     data: {
-      name, email, phone, destination, message
+      name, email, phone, destination, message, numTravellers
     }
   });
 }
