@@ -6,10 +6,20 @@ export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Contact Us | Exploration Tours' };
 
 export default async function ContactPage() {
-  const globalSetting = await prisma.setting.findUnique({ where: { key: 'global_settings' } });
+  let globalSetting = null;
+  let setting = null;
+
+  try {
+    [globalSetting, setting] = await Promise.all([
+      prisma.setting.findUnique({ where: { key: 'global_settings' } }),
+      prisma.setting.findUnique({ where: { key: 'page_contact' } })
+    ]);
+  } catch (error) {
+    console.error('Database connection error in ContactPage:', error);
+  }
+
   const global = globalSetting ? JSON.parse(globalSetting.value) : { phone: '+91 99999 99999', email: 'info@explorationtours.com', address: 'Jaipur, Rajasthan' };
   
-  const setting = await prisma.setting.findUnique({ where: { key: 'page_contact' } });
   const data = setting ? JSON.parse(setting.value) : {
     title: 'Get In Touch',
     subtitle: 'Ready to plan your trip? Contact our travel experts today.',
