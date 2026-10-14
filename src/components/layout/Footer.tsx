@@ -4,7 +4,12 @@ import Image from 'next/image';
 import { Facebook, Instagram, Youtube, Twitter, Send, Plane, ArrowRight } from 'lucide-react';
 
 export default async function Footer() {
-  const globalSetting = await prisma.setting.findUnique({ where: { key: 'global_settings' } });
+  let globalSetting = null;
+  try {
+    globalSetting = await prisma.setting.findUnique({ where: { key: 'global_settings' } });
+  } catch (error) {
+    console.error('Database connection error in Footer:', error);
+  }
   const global = globalSetting ? JSON.parse(globalSetting.value) : {
     phone: '+91 99999 99999',
     email: 'info@explorationtours.com',

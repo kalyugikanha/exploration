@@ -9,10 +9,15 @@ export const metadata = {
 };
 
 export default async function CruisesPage() {
-  const cruises = await prisma.cruise.findMany({
-    where: { isPublished: true },
-    orderBy: { createdAt: 'desc' }
-  });
+  let cruises: any[] = [];
+  try {
+    cruises = await prisma.cruise.findMany({
+      where: { isPublished: true },
+      orderBy: { createdAt: 'desc' }
+    });
+  } catch (error) {
+    console.error('Database connection error in CruisesPage:', error);
+  }
 
   return (
     <main className="w-full bg-slate-50 min-h-screen pt-32 pb-24">

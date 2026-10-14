@@ -6,16 +6,25 @@ import { MapPin, Clock, Anchor, CheckCircle2 } from 'lucide-react';
 import ContactForm from '@/components/ui/ContactForm';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const cruise = await prisma.cruise.findUnique({ where: { slug: params.slug } });
-  if (!cruise) return { title: 'Not Found' };
-  return { title: `${cruise.seoTitle || cruise.title} | Exploration Tours`, description: cruise.seoDesc || cruise.shortDesc };
+  try {
+    const cruise = await prisma.cruise.findUnique({ where: { slug: params.slug } });
+    if (!cruise) return { title: 'Not Found' };
+    return { title: `${cruise.seoTitle || cruise.title} | Exploration Tours`, description: cruise.seoDesc || cruise.shortDesc };
+  } catch (e) {
+    return { title: 'Exploration Tours' };
+  }
 }
 
 export default async function CruiseDetailPage({ params }: { params: { slug: string } }) {
-  const cruise = await prisma.cruise.findUnique({
-    where: { slug: params.slug },
-    include: { itineraries: { orderBy: { dayNumber: 'asc' } } }
-  });
+  let cruise = null;
+  try {
+    cruise = await prisma.cruise.findUnique({
+      where: { slug: params.slug },
+      include: { itineraries: { orderBy: { dayNumber: 'asc' } } }
+    });
+  } catch (e) {
+    console.error('Error fetching cruise:', e);
+  }
 
   if (!cruise || !cruise.isPublished) notFound();
 

@@ -7,10 +7,15 @@ import { ArrowRight, Calendar } from 'lucide-react';
 export const metadata = { title: 'Travel Blog | Exploration Tours' };
 
 export default async function BlogListPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: { isPublished: true },
-    orderBy: { publishedAt: 'desc' },
-  });
+  let posts: any[] = [];
+  try {
+    posts = await prisma.blogPost.findMany({
+      where: { isPublished: true },
+      orderBy: { publishedAt: 'desc' },
+    });
+  } catch (error) {
+    console.error('Database connection error in BlogListPage:', error);
+  }
 
   return (
     <main className="w-full bg-slate-50 min-h-screen">

@@ -7,11 +7,29 @@ export const metadata = {
   description: 'Find answers to common questions about booking, travel arrangements, and our bespoke tour packages.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function FaqsPage() {
-  const faqs = await prisma.faq.findMany({
-    where: { isActive: true },
-    orderBy: { order: 'asc' },
-  });
+  const defaultFaqs = [
+    { id: '1', question: 'How can I plan a customized trip?', answer: 'Contact us through our Travel Enquiry form or WhatsApp. Our travel experts will understand your requirements and create a personalized itinerary just for you.' },
+    { id: '2', question: 'How early should I book?', answer: 'We recommend booking at least 4–6 weeks in advance for domestic trips and 8–12 weeks for international trips, especially during peak seasons.' },
+    { id: '3', question: 'Do you provide international tour packages?', answer: 'Yes! We offer international tour packages to destinations across Europe, Southeast Asia, Middle East, Americas, Africa and more.' },
+    { id: '4', question: 'Do you assist with visa requirements?', answer: 'We provide visa guidance and documentation support. However, visa approval is subject to the respective country embassy decision.' },
+    { id: '5', question: 'Can packages be customized?', answer: 'Absolutely! All our packages can be customized based on your travel dates, budget, number of travellers and preferences.' },
+  ];
+
+  let faqs = defaultFaqs;
+  try {
+    const dbFaqs = await prisma.faq.findMany({
+      where: { isActive: true },
+      orderBy: { order: 'asc' },
+    });
+    if (dbFaqs && dbFaqs.length > 0) {
+      faqs = dbFaqs;
+    }
+  } catch (error) {
+    console.error('Database connection error in FaqsPage:', error);
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 pt-32 pb-24">

@@ -10,16 +10,21 @@ export const metadata = {
 };
 
 export default async function DestinationsPage() {
-  const destinations = await prisma.destination.findMany({
-    where: { isPublished: true },
-    orderBy: { name: 'asc' },
-    select: {
-      id: true, slug: true, name: true, region: true, shortDesc: true, heroImage: true,
-      _count: { select: { packages: true } }
-    }
-  });
+  let destinations: any[] = [];
+  try {
+    destinations = await prisma.destination.findMany({
+      where: { isPublished: true },
+      orderBy: { name: 'asc' },
+      select: {
+        id: true, slug: true, name: true, region: true, shortDesc: true, heroImage: true,
+        _count: { select: { packages: true } }
+      }
+    });
+  } catch (error) {
+    console.error('Database connection error in DestinationsPage:', error);
+  }
 
-  const topSpots = destinations.filter(d => d._count.packages > 0).slice(0, 4);
+  const topSpots = destinations.filter(d => d._count && d._count.packages > 0).slice(0, 4);
   const safeDest = JSON.parse(JSON.stringify(destinations));
 
   return (

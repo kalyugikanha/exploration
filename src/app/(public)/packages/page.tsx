@@ -7,11 +7,16 @@ import { ChevronRight, MapPin, Clock } from 'lucide-react';
 export const metadata = { title: 'Tour Packages | Exploration Tours' };
 
 export default async function PackagesPage() {
-  const dbPackages = await prisma.package.findMany({
-    where: { isPublished: true },
-    include: { destination: true },
-    orderBy: { createdAt: 'desc' }
-  });
+  let dbPackages: any[] = [];
+  try {
+    dbPackages = await prisma.package.findMany({
+      where: { isPublished: true },
+      include: { destination: true },
+      orderBy: { createdAt: 'desc' }
+    });
+  } catch (error) {
+    console.error('Database connection error in PackagesPage:', error);
+  }
 
   const dummyPackages = [
     {

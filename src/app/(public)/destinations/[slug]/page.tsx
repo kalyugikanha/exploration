@@ -5,16 +5,25 @@ import { prisma } from '@/lib/prisma';
 import { Heart, Facebook, Twitter, Instagram, MapPin, Clock, Sun, Play, MoreHorizontal } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const dest = await prisma.destination.findUnique({ where: { slug: params.slug } });
-  if (!dest) return { title: 'Not Found' };
-  return { title: `${dest.name} | Exploration Tours`, description: dest.seoDesc || dest.shortDesc };
+  try {
+    const dest = await prisma.destination.findUnique({ where: { slug: params.slug } });
+    if (!dest) return { title: 'Not Found' };
+    return { title: `${dest.name} | Exploration Tours`, description: dest.seoDesc || dest.shortDesc };
+  } catch (e) {
+    return { title: 'Exploration Tours' };
+  }
 }
 
 export default async function DestinationDetailPage({ params }: { params: { slug: string } }) {
-  const dest = await prisma.destination.findUnique({
-    where: { slug: params.slug },
-    include: { packages: { where: { isPublished: true } } }
-  });
+  let dest = null;
+  try {
+    dest = await prisma.destination.findUnique({
+      where: { slug: params.slug },
+      include: { packages: { where: { isPublished: true } } }
+    });
+  } catch (e) {
+    console.error('Error fetching destination:', e);
+  }
 
   if (!dest || !dest.isPublished) notFound();
 

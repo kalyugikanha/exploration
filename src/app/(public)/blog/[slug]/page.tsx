@@ -6,25 +6,35 @@ import { prisma } from '@/lib/prisma';
 import { Calendar, User, Facebook, Twitter, Linkedin, MessageCircle, ChevronRight } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await prisma.blogPost.findUnique({ include: { comments: { where: { isApproved: true }, orderBy: { createdAt: 'desc' } } },  where: { slug: params.slug } });
-  if (!post) return { title: 'Post Not Found' };
-  return {
-    title: `${post.seoTitle || post.title} | Exploration Tours`,
-    description: post.seoDesc || post.introText,
-  };
+  try {
+    const post = await prisma.blogPost.findUnique({ include: { comments: { where: { isApproved: true }, orderBy: { createdAt: 'desc' } } },  where: { slug: params.slug } });
+    if (!post) return { title: 'Post Not Found' };
+    return {
+      title: `${post.seoTitle || post.title} | Exploration Tours`,
+      description: post.seoDesc || post.introText,
+    };
+  } catch (e) {
+    return { title: 'Exploration Tours' };
+  }
 }
 
 export default async function BlogDetailPage({ params }: { params: { slug: string } }) {
-  const post = await prisma.blogPost.findUnique({ include: { comments: { where: { isApproved: true }, orderBy: { createdAt: 'desc' } } },  where: { slug: params.slug } });
+  let post = null;
+  let recentPosts: any[] = [];
+  try {
+    post = await prisma.blogPost.findUnique({ include: { comments: { where: { isApproved: true }, orderBy: { createdAt: 'desc' } } },  where: { slug: params.slug } });
+    if (post && post.isPublished) {
+      recentPosts = await prisma.blogPost.findMany({
+        where: { isPublished: true, slug: { not: params.slug } },
+        orderBy: { publishedAt: 'desc' },
+        take: 6,
+      });
+    }
+  } catch (e) {
+    console.error('Error fetching blog post:', e);
+  }
 
   if (!post || !post.isPublished) notFound();
-
-  // Fetch recent posts for sidebar and related
-  const recentPosts = await prisma.blogPost.findMany({
-    where: { isPublished: true, slug: { not: params.slug } },
-    orderBy: { publishedAt: 'desc' },
-    take: 6,
-  });
 
   const sidebarPosts = recentPosts.slice(0, 4);
   const relatedPosts = recentPosts.slice(4, 6);
