@@ -16,14 +16,77 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function CruiseDetailPage({ params }: { params: { slug: string } }) {
-  let cruise = null;
-  try {
-    cruise = await prisma.cruise.findUnique({
-      where: { slug: params.slug },
-      include: { itineraries: { orderBy: { dayNumber: 'asc' } } }
-    });
-  } catch (e) {
-    console.error('Error fetching cruise:', e);
+  const fallbackCruiseDetails: Record<string, any> = {
+    'disney-cruise-bahamas-caribbean': {
+      id: 'cruise-disney',
+      slug: 'disney-cruise-bahamas-caribbean',
+      title: 'Disney Cruise Line — Bahamian & Caribbean Magic',
+      region: 'Bahamas & Caribbean',
+      duration: '5 Days / 4 Nights',
+      shortDesc: 'Enchanting family voyages featuring world-class Broadway-style Disney entertainment, fireworks at sea, and exclusive calls at the private island paradise Castaway Cay.',
+      content: '<p>Step aboard a realm where fantasy becomes reality. Disney Cruise Line blends legendary Disney storytelling, magnificent Broadway-quality musical productions, and immersive themed restaurants with the relaxation of a luxury ocean vacation. Sail to Disney\'s private island paradise, Castaway Cay, where powdery white-sand beaches, crystal lagoons, and exclusive adult retreats await.</p>',
+      heroImage: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?q=80&w=1600',
+      gallery: [
+        'https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=800',
+        'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=800',
+        'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800'
+      ],
+      isPublished: true,
+      itineraries: [
+        { dayNumber: 1, title: 'Port Canaveral (Orlando)', timeOfDay: 'Afternoon', description: 'Embark on the magnificent vessel. Attend the Sail-Away deck party with iconic Disney characters, settle into your stateroom, and enjoy your first rotational dining experience.', images: ['https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=800'] },
+        { dayNumber: 2, title: 'Day at Sea in the Atlantic', timeOfDay: 'Full Day', description: 'Experience the exhilarating AquaDuck water coaster, relax at the Quiet Cove adult-only pool, indulge in Senses Spa treatments, and enjoy a Broadway-caliber Disney live show.', images: ['https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800'] },
+        { dayNumber: 3, title: 'Disney Castaway Cay (Private Island)', timeOfDay: 'Morning & Afternoon', description: 'Drop anchor at Disney\'s exclusive Bahamian private island. Snorkel in crystal lagoons, cycle along beachfront nature trails, and feast on an open-air barbecue buffet.', images: ['https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=800'] },
+        { dayNumber: 4, title: 'Nassau, The Bahamas', timeOfDay: 'Full Day', description: 'Explore colorful colonial architecture, historic stone fortresses, vibrant straw markets, or enjoy private excursions to the Atlantis resort.', images: ['https://images.unsplash.com/photo-1540202404-b7111422898b?q=80&w=800'] }
+      ]
+    },
+    'royal-caribbean-ultimate-voyager': {
+      id: 'cruise-royal-caribbean',
+      slug: 'royal-caribbean-ultimate-voyager',
+      title: 'Royal Caribbean — Oasis & Icon Class Expeditions',
+      region: 'Western Caribbean & Mediterranean',
+      duration: '7 Days / 6 Nights',
+      shortDesc: 'Sail aboard the globe’s most magnificent cruise vessels featuring neighborhood concepts, surf simulators, live Broadway musicals, and Perfect Day at CocoCay.',
+      content: '<p>Royal Caribbean redefines high-seas adventure with the world\'s most innovative mega-ships. Featuring groundbreaking neighborhoods including Central Park with real living plants, the AquaTheater high-diving shows, ice-skating rinks, and multi-deck waterslides. Anchor at Perfect Day at CocoCay to conquer record-breaking waterslides or unwind in luxury overwater cabanas.</p>',
+      heroImage: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=1600',
+      gallery: [
+        'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?q=80&w=800',
+        'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=800',
+        'https://images.unsplash.com/photo-1533682805518-48d1f5b8cb3a?q=80&w=800'
+      ],
+      isPublished: true,
+      itineraries: [
+        { dayNumber: 1, title: 'Miami Port Departure', timeOfDay: 'Evening', description: 'Board the floating architectural marvel in Miami. Take in breathtaking skyline views as we sail out into the Caribbean sunset.', images: ['https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800'] },
+        { dayNumber: 2, title: 'Perfect Day at CocoCay', timeOfDay: 'Full Day', description: 'Spend an adrenaline-pumping or deeply relaxing day on Royal Caribbean\'s private Bahamian island. Experience the tallest waterslide in North America or chill at the Coco Beach Club.', images: ['https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=800'] },
+        { dayNumber: 3, title: 'Cruising the Western Caribbean', timeOfDay: 'Sea Day', description: 'Stroll through Central Park with over 20,000 live plants, catch an ice skating show, and dine at world-class specialty restaurants curated by celebrity chefs.', images: ['https://images.unsplash.com/photo-1533682805518-48d1f5b8cb3a?q=80&w=800'] },
+        { dayNumber: 4, title: 'Cozumel, Mexico', timeOfDay: 'Full Day', description: 'Discover ancient Mayan ruins of San Gervasio, snorkel the Palancar Reef system, or relax at pristine beach resorts.', images: ['https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=800'] }
+      ]
+    },
+    'norwegian-cruise-line-freestyle': {
+      id: 'cruise-norwegian',
+      slug: 'norwegian-cruise-line-freestyle',
+      title: 'Norwegian Cruise Line — Alaska Glaciers & European Fjords',
+      region: 'Alaska & European Fjords',
+      duration: '8 Days / 7 Nights',
+      shortDesc: 'Embrace the unmatched freedom of Freestyle Cruising. Sail past soaring Alaskan icebergs and dramatic Norwegian Fjords while enjoying VIP access in The Haven suites.',
+      content: '<p>Feel the pure thrill of Freestyle Cruising with Norwegian Cruise Line. With no fixed dining times, no pre-assigned seating, and relaxed dress codes, you dictate the rhythm of your holiday. Take in panoramic 360-degree views of towering glaciers and rugged wilderness from the expansive Observation Lounge, or relax in The Haven, a private enclave of ultra-luxury suites.</p>',
+      heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=1600',
+      gallery: [
+        'https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=800',
+        'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?q=80&w=800',
+        'https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?q=80&w=800'
+      ],
+      isPublished: true,
+      itineraries: [
+        { dayNumber: 1, title: 'Seattle, Washington', timeOfDay: 'Afternoon', description: 'Board the state-of-the-art vessel at Pier 66 in downtown Seattle with sweeping views of Puget Sound.', images: ['https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=800'] },
+        { dayNumber: 2, title: 'Scenic Cruising: Inside Passage', timeOfDay: 'Full Day', description: 'Glide past towering coastal rainforests, remote islands, and tranquil fjords. Keep watch for humpback whales, orcas, and bald eagles from the observation deck.', images: ['https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?q=80&w=800'] },
+        { dayNumber: 3, title: 'Juneau, Alaska', timeOfDay: 'Full Day', description: 'Visit Alaska’s capital city. Take a helicopter flight to walk upon Mendenhall Glacier, or embark on a guided whale-watching catamaran.', images: ['https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=800'] },
+        { dayNumber: 4, title: 'Skagway & White Pass Summit', timeOfDay: 'Full Day', description: 'Step into Gold Rush history. Ride the vintage White Pass & Yukon Route narrow-gauge railroad climbing 3,000 feet past cliffs and gorges.', images: ['https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800'] }
+      ]
+    }
+  };
+
+  if (!cruise && fallbackCruiseDetails[params.slug]) {
+    cruise = fallbackCruiseDetails[params.slug];
   }
 
   if (!cruise || !cruise.isPublished) notFound();

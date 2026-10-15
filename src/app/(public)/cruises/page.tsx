@@ -8,6 +8,41 @@ export const metadata = {
   description: 'Set sail on an unforgettable journey across the world\'s most beautiful oceans and rivers.',
 };
 
+export const dynamic = 'force-dynamic';
+
+const fallbackCruises = [
+  {
+    id: 'cruise-disney',
+    slug: 'disney-cruise-bahamas-caribbean',
+    title: 'Disney Cruise Line — Bahamian & Caribbean Magic',
+    region: 'Bahamas & Caribbean',
+    duration: '5 Days / 4 Nights',
+    shortDesc: 'Enchanting family voyages featuring world-class Broadway-style Disney entertainment, fireworks at sea, and exclusive calls at the private island paradise Castaway Cay.',
+    heroImage: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?q=80&w=1600',
+    isPublished: true,
+  },
+  {
+    id: 'cruise-royal-caribbean',
+    slug: 'royal-caribbean-ultimate-voyager',
+    title: 'Royal Caribbean — Oasis & Icon Class Expeditions',
+    region: 'Western Caribbean & Mediterranean',
+    duration: '7 Days / 6 Nights',
+    shortDesc: 'Sail aboard the globe’s most magnificent cruise vessels featuring neighborhood concepts, surf simulators, live Broadway musicals, and Perfect Day at CocoCay.',
+    heroImage: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=1600',
+    isPublished: true,
+  },
+  {
+    id: 'cruise-norwegian',
+    slug: 'norwegian-cruise-line-freestyle',
+    title: 'Norwegian Cruise Line — Alaska Glaciers & European Fjords',
+    region: 'Alaska & European Fjords',
+    duration: '8 Days / 7 Nights',
+    shortDesc: 'Embrace the unmatched freedom of Freestyle Cruising. Sail past soaring Alaskan icebergs and dramatic Norwegian Fjords while enjoying VIP access in The Haven suites.',
+    heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=1600',
+    isPublished: true,
+  }
+];
+
 export default async function CruisesPage() {
   let cruises: any[] = [];
   try {
@@ -18,6 +53,8 @@ export default async function CruisesPage() {
   } catch (error) {
     console.error('Database connection error in CruisesPage:', error);
   }
+
+  const finalCruises = cruises.length > 0 ? cruises : fallbackCruises;
 
   return (
     <main className="w-full bg-slate-50 min-h-screen pt-32 pb-24">
@@ -35,9 +72,9 @@ export default async function CruisesPage() {
         </div>
 
         {/* Cruise Grid */}
-        {cruises.length > 0 ? (
+        {finalCruises.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cruises.map(cruise => (
+            {finalCruises.map(cruise => (
               <Link href={`/cruises/${cruise.slug}`} key={cruise.id} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 flex flex-col">
                 <div className="relative h-64 overflow-hidden">
                   <Image src={cruise.heroImage || '/placeholder.jpg'} alt={cruise.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -52,7 +89,7 @@ export default async function CruisesPage() {
                     <Clock className="w-4 h-4 text-brand-600" />
                     {cruise.duration || 'Flexible Duration'}
                   </div>
-                  <p className="text-slate-600 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">
+                  <p className="text-slate-600 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed editorial-text">
                     {cruise.shortDesc}
                   </p>
                   <div className="flex items-center text-brand-600 font-bold text-sm uppercase tracking-wider mt-auto group-hover:translate-x-2 transition-transform">

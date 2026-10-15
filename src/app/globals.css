@@ -76,3 +76,10 @@
 .hover-shine:hover::before {
   left: 200%;
 }
+
+/* Editorial justified text */
+.editorial-text {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}

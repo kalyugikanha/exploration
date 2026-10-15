@@ -15,7 +15,10 @@ export default async function Footer() {
     email: 'info@explorationtours.com',
     address: 'Jaipur, Rajasthan, India',
     footerAbout: 'Exploration Tours believes that travel should be a personal experience, not a mass-produced product. We curate deeply personalised journeys around the world, designed exclusively around your style, pace, and passions.',
-    facebook: '#', instagram: '#', twitter: '#',
+    facebook: 'https://facebook.com/explorationtours',
+    instagram: 'https://instagram.com/explorationtours',
+    twitter: 'https://twitter.com/explorationtour',
+    youtube: 'https://youtube.com/@explorationtours',
     copyright: 'Exploration Tours. All rights reserved.'
   };
 
@@ -34,7 +37,7 @@ export default async function Footer() {
               </div>
             </Link>
             <div className="text-slate-500 text-sm leading-relaxed mb-8 font-medium space-y-2">
-              <p>{global.footerAbout}</p>
+              <p className="editorial-text">{global.footerAbout}</p>
             </div>
             
             <div className="space-y-3 mb-8">
@@ -68,16 +71,16 @@ export default async function Footer() {
             </div>
 
             <div className="flex items-center gap-3">
-              <a href={global.facebook || "#"} target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-brand-700 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,99,235,0.3)] transition-all duration-300">
+              <a href={global.facebook && global.facebook !== '#' ? global.facebook : "https://facebook.com/explorationtours"} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-brand-700 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,99,235,0.3)] transition-all duration-300">
                 <Facebook className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
-              <a href={global.instagram || "#"} target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-pink-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(219,39,119,0.3)] transition-all duration-300">
+              <a href={global.instagram && global.instagram !== '#' ? global.instagram : "https://instagram.com/explorationtours"} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-pink-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(219,39,119,0.3)] transition-all duration-300">
                 <Instagram className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
-              <a href={global.twitter || "#"} target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-brand-800 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(29,78,216,0.3)] transition-all duration-300">
-                <svg className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              <a href={global.twitter && global.twitter !== '#' ? global.twitter : "https://twitter.com/explorationtour"} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-brand-800 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(29,78,216,0.3)] transition-all duration-300">
+                <Twitter className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-red-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(220,38,38,0.3)] transition-all duration-300">
+              <a href={global.youtube && global.youtube !== '#' ? global.youtube : "https://youtube.com/@explorationtours"} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="group w-10 h-10 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] flex items-center justify-center hover:bg-red-600 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(220,38,38,0.3)] transition-all duration-300">
                 <Youtube className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
             </div>
@@ -104,6 +107,7 @@ export default async function Footer() {
             <h4 className="text-slate-900 font-bold mb-8 text-lg font-display">Support</h4>
             <ul className="space-y-4 text-sm font-medium">
               <li><Link href="/faqs" className="group flex items-center text-slate-500 hover:text-[#045a94] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" /><span className="transform group-hover:translate-x-1 transition-transform duration-300">FAQs</span></Link></li>
+              <li><Link href="/cancellation-and-refund-policies.html" className="group flex items-center text-slate-500 hover:text-[#045a94] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" /><span className="transform group-hover:translate-x-1 transition-transform duration-300">Cancellation & Refund</span></Link></li>
               <li><Link href="/privacy" className="group flex items-center text-slate-500 hover:text-[#045a94] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" /><span className="transform group-hover:translate-x-1 transition-transform duration-300">Privacy Policy</span></Link></li>
               <li><Link href="/terms" className="group flex items-center text-slate-500 hover:text-[#045a94] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" /><span className="transform group-hover:translate-x-1 transition-transform duration-300">Terms & Conditions</span></Link></li>
             </ul>
@@ -150,6 +154,7 @@ export default async function Footer() {
           </p>
           
           <div className="flex flex-wrap gap-4 md:gap-6 text-sm text-slate-400 font-medium">
+            <Link href="/cancellation-and-refund-policies.html" className="hover:text-[#045a94] transition-colors">Cancellation & Refund</Link>
             <Link href="/terms" className="hover:text-[#045a94] transition-colors">Terms</Link>
             <Link href="/privacy" className="hover:text-[#045a94] transition-colors">Privacy</Link>
           </div>

@@ -41,8 +41,20 @@ export default async function HomePage() {
 
   const alignClass = data.heroAlign === 'left' ? 'items-start text-left' : data.heroAlign === 'right' ? 'items-end text-right' : 'items-center text-center';
 
+  const fallbackHomeDests = [
+    { id: '1', slug: 'kerala-gods-own-country', name: 'Kerala', shortDesc: 'Tranquil backwaters & Ayurvedic sanctuaries', heroImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800' },
+    { id: '2', slug: 'rajasthan-royal-heritage', name: 'Rajasthan', shortDesc: 'Imperial palaces & vibrant desert culture', heroImage: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=800' },
+    { id: '3', slug: 'kashmir-paradise-on-earth', name: 'Kashmir', shortDesc: 'Snow-capped peaks & serene Dal Lake shikaras', heroImage: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=800' },
+    { id: '4', slug: 'switzerland-alps-lakes', name: 'Switzerland', shortDesc: 'Majestic Alps, lakes, and alpine villages', heroImage: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800' },
+    { id: '5', slug: 'japan-tokyo-kyoto', name: 'Japan', shortDesc: 'Timeless Kyoto shrines & vibrant Tokyo', heroImage: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800' },
+    { id: '6', slug: 'france-paris-riviera', name: 'France', shortDesc: 'Romantic Paris avenues & the French Riviera', heroImage: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800' },
+    { id: '7', slug: 'indonesia-bali-escapes', name: 'Indonesia', shortDesc: 'Sacred water temples & private pool villas', heroImage: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800' },
+    { id: '8', slug: 'greece-santorini-athens', name: 'Greece', shortDesc: 'Santorini cliffside villas & ancient ruins', heroImage: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=800' },
+  ];
+
   // Combine destinations for the Explore section
-  const allDests = [...domesticDests, ...internationalDests].slice(0, 8);
+  const combinedDests = [...domesticDests, ...internationalDests];
+  const allDests = combinedDests.length > 0 ? combinedDests.slice(0, 8) : fallbackHomeDests;
 
   return (
     <main className="w-full min-h-screen bg-white">
@@ -83,7 +95,7 @@ export default async function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform transition-transform duration-300">
                   <h3 className="text-2xl font-display font-bold mb-1">{dest.name}</h3>
-                  <p className="text-sm text-white/80 line-clamp-2">{dest.shortDesc}</p>
+                  <p className="text-sm text-white/80 line-clamp-2 editorial-text">{dest.shortDesc}</p>
                 </div>
               </Link>
             ))}

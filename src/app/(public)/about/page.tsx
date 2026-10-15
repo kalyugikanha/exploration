@@ -24,15 +24,87 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div data-aos="fade-right">
             <h2 className="text-4xl font-display font-bold text-slate-900 mb-6">We believe travel is a personal experience, not a mass-produced product.</h2>
-            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+            <p className="text-lg text-slate-600 mb-6 leading-relaxed editorial-text">
               Founded on the principle that every journey should be as unique as the traveler, Exploration Tours curates deeply personalized trips around the globe.
             </p>
-            <p className="text-lg text-slate-600 leading-relaxed">
-              From exclusive access to remote destinations, to luxury cruises that sail the world's most pristine waters, we handle every detail so you can focus on making memories.
+            <p className="text-lg text-slate-600 leading-relaxed editorial-text">
+              From exclusive access to remote destinations, to luxury cruises that sail the world&apos;s most pristine waters, we handle every detail so you can focus on making memories.
             </p>
           </div>
           <div className="relative h-[500px] rounded-[2rem] overflow-hidden shadow-xl" data-aos="fade-left">
             <Image src="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?q=80&w=800&auto=format&fit=crop" alt="Traveler" fill className="object-cover" />
+          </div>
+        </div>
+      </section>
+
+      {/* THE FOUNDER'S CUT SECTION */}
+      <section className="py-24 bg-gradient-to-b from-slate-900 to-[#022238] text-white relative overflow-hidden">
+        {/* Subtle decorative background circles */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#045a94]/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left: Founder Portrait & Credentials (Span 5) */}
+            <div className="lg:col-span-5" data-aos="fade-right">
+              <div className="relative mx-auto max-w-md lg:max-w-none">
+                <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/10 group">
+                  <Image 
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" 
+                    alt="Founder, Exploration Tours" 
+                    fill 
+                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                  
+                  {/* Founder Badge Overlay */}
+                  <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                    <p className="text-xs uppercase tracking-widest text-brand-300 font-bold mb-1">Exploration Tours Leadership</p>
+                    <h3 className="text-2xl font-display font-bold text-white">Founder&apos;s Perspective</h3>
+                    <p className="text-sm text-slate-300 mt-1 font-medium">Bespoke Journeys &amp; Private Expeditions</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: The Founder's Letter & Narrative (Span 7) */}
+            <div className="lg:col-span-7" data-aos="fade-left">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-400/30 text-xs font-bold uppercase tracking-widest mb-6">
+                <span>The Founder&apos;s Cut</span>
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-8 leading-tight">
+                &ldquo;Travel is not merely an itinerary; it is the art of unhurried wonder.&rdquo;
+              </h2>
+
+              <div className="space-y-6 text-slate-300 text-base md:text-lg editorial-text leading-relaxed font-light">
+                <p>
+                  When I founded <strong className="text-white font-semibold">Exploration Tours</strong>, it was born out of a deep personal realization: modern tourism had become rushed, transactional, and overly standardized. Travelers were being led through checklist destinations without the space to breathe, connect, and genuinely feel the pulse of the places they visited.
+                </p>
+                <p>
+                  To us, genuine luxury has nothing to do with ostentation. It is the privilege of time, privacy, and thoughtful curation. It is having a private tea tasting amidst the misty rolling hills of Munnar, taking a scenic train past snow-capped Swiss peaks with loved ones, or sailing on an ocean liner where every sunset feels reserved just for you.
+                </p>
+                <p>
+                  Every journey we craft begins with a conversation about you—your rhythm, your passions, and the memories you hope to bring home. Our dedicated team and global partners ensure that from the moment you leave your front door until you return, every detail is seamlessly orchestrated.
+                </p>
+              </div>
+
+              {/* Founder Quote Card & Signoff */}
+              <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div>
+                  <h4 className="text-xl font-display font-bold text-white">Founder &amp; Managing Director</h4>
+                  <p className="text-sm text-brand-300 font-medium">Exploration Tours &amp; Expeditions</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/15 text-xs text-slate-300 font-mono tracking-wider">
+                    EST. JAIPUR &bull; SERVING GLOBALLY
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </section>

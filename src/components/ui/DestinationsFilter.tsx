@@ -9,46 +9,75 @@ type Destination = {
   slug: string;
   name: string;
   region: string;
+  country?: string | null;
   shortDesc: string | null;
   heroImage: string | null;
 };
 
 export default function DestinationsFilter({ destinations }: { destinations: Destination[] }) {
-  const [filter, setFilter] = useState<'all' | 'domestic' | 'international'>('all');
+  const [filter, setFilter] = useState<'all' | 'domestic' | 'asia' | 'europe'>('all');
+
+  const isDomestic = (d: Destination) => 
+    d.region?.toLowerCase() === 'domestic' || 
+    d.country?.toLowerCase() === 'india' ||
+    ['kerala', 'rajasthan', 'kashmir', 'north east', 'himalayan', 'south india'].some(k => d.name.toLowerCase().includes(k));
+
+  const isAsia = (d: Destination) => {
+    const asiaKeywords = ['japan', 'korea', 'vietnam', 'singapore', 'indonesia', 'philippines', 'bali', 'asia', 'far east', 'thailand'];
+    const name = d.name.toLowerCase();
+    const country = (d.country || '').toLowerCase();
+    return asiaKeywords.some(k => name.includes(k) || country.includes(k));
+  };
+
+  const isEurope = (d: Destination) => {
+    const europeKeywords = ['switzerland', 'france', 'greece', 'finland', 'norway', 'croatia', 'europe', 'alps', 'paris', 'athens'];
+    const name = d.name.toLowerCase();
+    const country = (d.country || '').toLowerCase();
+    return europeKeywords.some(k => name.includes(k) || country.includes(k));
+  };
 
   const filtered = destinations.filter(d => {
     if (filter === 'all') return true;
-    return d.region.toLowerCase() === filter;
+    if (filter === 'domestic') return isDomestic(d);
+    if (filter === 'asia') return isAsia(d);
+    if (filter === 'europe') return isEurope(d);
+    return true;
   });
 
   return (
     <div>
       <div className="flex justify-center mb-12">
-        <div className="inline-flex bg-white p-1 rounded-xl shadow-sm border border-slate-100">
+        <div className="inline-flex flex-wrap justify-center gap-1 bg-white p-1.5 rounded-2xl shadow-sm border border-slate-100 max-w-full">
           <button 
             onClick={() => setFilter('all')} 
-            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${filter === 'all' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'}`}
+            className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${filter === 'all' ? 'bg-[#045a94] text-white shadow-md' : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'}`}
           >
             All Destinations
           </button>
           <button 
             onClick={() => setFilter('domestic')} 
-            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${filter === 'domestic' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'}`}
+            className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${filter === 'domestic' ? 'bg-[#045a94] text-white shadow-md' : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'}`}
           >
-            Domestic
+            Domestic (India)
           </button>
           <button 
-            onClick={() => setFilter('international')} 
-            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${filter === 'international' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'}`}
+            onClick={() => setFilter('asia')} 
+            className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${filter === 'asia' ? 'bg-[#045a94] text-white shadow-md' : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'}`}
           >
-            International
+            Asia &amp; The Far East
+          </button>
+          <button 
+            onClick={() => setFilter('europe')} 
+            className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${filter === 'europe' ? 'bg-[#045a94] text-white shadow-md' : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'}`}
+          >
+            Europe
           </button>
         </div>
       </div>
 
       {filtered.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((dest, idx) => (
+          {filtered.map((dest) => (
             <div 
               key={dest.id} 
               className="bg-white rounded-[2rem] p-4 border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(4,90,148,0.08)] transition-all duration-500 group flex flex-col"
@@ -56,7 +85,7 @@ export default function DestinationsFilter({ destinations }: { destinations: Des
               <div className="relative w-full aspect-[4/3] rounded-[1.5rem] overflow-hidden mb-6">
                 <Image src={dest.heroImage || '/placeholder.jpg'} alt={dest.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-md border border-white/40 text-white px-3 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
-                  {dest.region}
+                  {dest.country || dest.region}
                 </div>
               </div>
 
@@ -64,8 +93,8 @@ export default function DestinationsFilter({ destinations }: { destinations: Des
                 <h3 className="text-2xl font-display font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">
                   {dest.name}
                 </h3>
-                <p className="text-slate-500 text-sm line-clamp-2 leading-relaxed mb-6 flex-1">
-                  {dest.shortDesc || `Escape to ${dest.name} for an unforgettable journey.`}
+                <p className="text-slate-500 text-sm line-clamp-3 leading-relaxed mb-6 flex-1 editorial-text">
+                  {dest.shortDesc || `Escape to ${dest.name} for an unforgettable luxury journey.`}
                 </p>
                 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">

@@ -29,7 +29,7 @@ export default function OurStory() {
             <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 mb-6 leading-tight">
               Travel Is Personal. <br/><span className="text-[#045a94]">So Is Our Service.</span>
             </h2>
-            <div className="space-y-4 text-slate-600 text-lg leading-relaxed">
+            <div className="space-y-4 text-slate-600 text-lg leading-relaxed editorial-text">
               <p>
                 For over two decades, we have believed that travel is more than just visiting a destination—it's about how the journey makes you feel.
               </p>
