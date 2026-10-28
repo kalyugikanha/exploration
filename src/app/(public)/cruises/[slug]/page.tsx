@@ -16,6 +16,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function CruiseDetailPage({ params }: { params: { slug: string } }) {
+  let cruise: any = null;
+  try {
+    cruise = await prisma.cruise.findUnique({
+      where: { slug: params.slug },
+      include: { itineraries: { orderBy: { dayNumber: 'asc' } } }
+    });
+  } catch (error) {
+    console.error('Error fetching cruise:', error);
+  }
+
   const fallbackCruiseDetails: Record<string, any> = {
     'disney-cruise-bahamas-caribbean': {
       id: 'cruise-disney',

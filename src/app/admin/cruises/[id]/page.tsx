@@ -2,15 +2,21 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import CruiseForm from '../CruiseForm';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminCruiseFormPage({ params }: { params: { id: string } }) {
   const isNew = params.id === 'new';
   let cruise = null;
 
   if (!isNew) {
-    cruise = await prisma.cruise.findUnique({ 
-      where: { id: params.id },
-      include: { itineraries: { orderBy: { dayNumber: 'asc' } } }
-    });
+    try {
+      cruise = await prisma.cruise.findUnique({ 
+        where: { id: params.id },
+        include: { itineraries: { orderBy: { dayNumber: 'asc' } } }
+      });
+    } catch (e) {
+      console.error('Error fetching cruise:', e);
+    }
   }
 
   return (

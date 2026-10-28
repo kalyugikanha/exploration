@@ -1,70 +1,198 @@
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { FileText, CheckCircle2, AlertTriangle, ShieldCheck, Scale, MapPin, Mail, ChevronRight } from 'lucide-react';
 
-export const metadata = { title: 'Terms & Conditions | Exploration Tours' };
+export const metadata = {
+  title: 'Terms & Conditions | Exploration Tours',
+  description: 'Terms and conditions governing travel planning and bookings with Exploration Tours.'
+};
 
 export default function TermsPage() {
   return (
-    <main className="w-full bg-[#fdfdfd] min-h-screen pb-24">
-      
-      {/* HERO SECTION */}
-      <section className="relative w-full h-[40vh] min-h-[350px] flex items-center justify-center pt-20 max-w-full mx-auto overflow-hidden shadow-sm">
-        <div className="absolute inset-0 bg-[#0f172a]"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#045a94]/80 to-transparent"></div>
-        <div className="relative z-10 text-center px-4">
-          <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-4 drop-shadow-lg">
-            Terms & Conditions
-          </h1>
-          <p className="text-white/80 font-medium text-lg">
-            Guidelines and Rules for Using Our Services
+    <main className="w-full bg-slate-50 min-h-screen pt-28 pb-24">
+      <div className="max-w-4xl mx-auto px-4 md:px-8">
+        
+        {/* Header Hero */}
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 mb-10">
+          <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+            <div className="w-16 h-16 bg-brand-50 text-[#045a94] rounded-2xl flex items-center justify-center shrink-0">
+              <Scale className="w-8 h-8" />
+            </div>
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#045a94] bg-sky-50 px-3 py-1 rounded-full mb-1 inline-block">
+                Client Agreement
+              </span>
+              <h1 className="text-3xl md:text-5xl font-display font-bold text-slate-900">
+                Terms &amp; Conditions
+              </h1>
+              <p className="text-slate-400 text-sm mt-1">Last Updated: October 2026 &bull; Exploration Tours</p>
+            </div>
+          </div>
+
+          <p className="text-slate-600 leading-relaxed text-base md:text-lg font-light">
+            Welcome to <strong className="font-semibold text-slate-900">Exploration Tours</strong>. These terms constitute a legally binding agreement between you (&quot;Client&quot;, &quot;Traveler&quot;) and Exploration Tours. By requesting an itinerary, making a deposit, or purchasing a tour package, you acknowledge and accept these terms in full.
           </p>
-        </div>
-      </section>
 
-      {/* CONTENT SECTION */}
-      <section className="max-w-4xl mx-auto px-4 md:px-8 mt-16 md:mt-24">
-        <div className="w-full flex-1 prose prose-lg prose-slate prose-headings:font-display prose-headings:font-bold prose-headings:text-[#045a94] prose-p:text-slate-600 prose-p:leading-relaxed max-w-none">
+          {/* Key Principle Badges */}
+          <div className="grid sm:grid-cols-3 gap-4 mt-8 pt-6 border-t border-slate-100">
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+              <div className="font-bold text-slate-900 text-sm mb-1 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Transparent Pricing
+              </div>
+              <p className="text-xs text-slate-500">
+                All mandatory taxes and scheduled inclusions are itemized with zero hidden fees.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+              <div className="font-bold text-slate-900 text-sm mb-1 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#045a94]" /> Verified Partners
+              </div>
+              <p className="text-xs text-slate-500">
+                We only partner with vetted airlines, certified hotels, and premium cruise lines.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+              <div className="font-bold text-slate-900 text-sm mb-1 flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-brand-600" /> Jaipur Jurisdiction
+              </div>
+              <p className="text-xs text-slate-500">
+                Governed under Indian laws with exclusive jurisdiction in Jaipur, Rajasthan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Structured Clauses */}
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 space-y-12">
           
-          <h2 className="text-3xl mb-6">Terms and Conditions for Exploration Tours</h2>
-          <p>These Terms and Conditions govern the relationship between Exploration Tours and its clients. By engaging our services, you agree to comply with these terms. Please read them carefully before using our services.</p>
+          {/* 1. Services */}
+          <section>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm flex items-center justify-center shrink-0">1</span>
+              <h2 className="text-2xl font-display font-bold text-slate-900">Scope of Travel Services</h2>
+            </div>
+            <div className="pl-11 space-y-3 text-sm text-slate-600 leading-relaxed">
+              <p>
+                1.1 Exploration Tours operates as an experiential travel designer and curator. Our services encompass customized day-by-day itinerary planning, accommodation reservations, private transfers, domestic/international flight bookings, cruise cabin reservations, and local sightseeing coordination.
+              </p>
+              <p>
+                1.2 While we exercise rigorous diligence in choosing suppliers, third-party operators (such as airlines, rail corporations, independent resorts, and local ship crews) operate under their individual terms of carriage and property policies.
+              </p>
+            </div>
+          </section>
 
-          <h2 className="text-2xl mt-10 mb-4">Services</h2>
-          <p>Exploration Tours provides travel consultancy services to assist clients in planning, organizing, and booking travel arrangements. Our services include but are not limited to itinerary planning, accommodation bookings, transportation arrangements, and travel insurance assistance.</p>
+          {/* 2. Bookings & Payments */}
+          <section>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm flex items-center justify-center shrink-0">2</span>
+              <h2 className="text-2xl font-display font-bold text-slate-900">Bookings, Pricing &amp; Payment Schedule</h2>
+            </div>
+            <div className="pl-11 space-y-3 text-sm text-slate-600 leading-relaxed">
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <h4 className="font-bold text-slate-900 text-sm mb-1">2.1 Quotation Validity &amp; Price Fluctuations</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Quoted prices remain provisional until formal receipt of the booking deposit. In rare cases of sudden currency revaluations, airline fuel surcharge revisions, or newly imposed governmental entrance taxes, prices may be adjusted prior to final ticketing.
+                </p>
+              </div>
 
-          <h2 className="text-2xl mt-10 mb-4">Client Responsibilities</h2>
-          <p>Clients are responsible for providing accurate and complete information necessary for the provision of our services. This includes details regarding travel preferences, requirements, and any special requests.</p>
-          <p>Clients must comply with all applicable laws, regulations, and travel requirements of the destinations they intend to visit.</p>
-          <p>Clients are responsible for obtaining necessary travel documents such as passports, visas, and health certificates.</p>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <h4 className="font-bold text-slate-900 text-sm mb-1">2.2 Standard Payment Milestones</h4>
+                <ul className="list-disc pl-5 text-xs text-slate-600 space-y-1 mt-1">
+                  <li><strong>Initial Token / Deposit:</strong> 25% of total tour package cost upon itinerary confirmation.</li>
+                  <li><strong>Interim Payment:</strong> 50% due 45 days prior to scheduled departure date (or sooner for high-demand cruises and peak holidays).</li>
+                  <li><strong>Balance Settlement:</strong> 100% final payment due 21 days prior to travel departure.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
 
-          <h2 className="text-2xl mt-10 mb-4">Bookings and Payments</h2>
-          <p>Booking requests are subject to availability and confirmation by Exploration Tours and our travel partners.</p>
-          <p>Clients are required to pay applicable fees, deposits, and any additional charges associated with their bookings. Payment terms will be communicated at the time of booking.</p>
-          <p>Cancellation and refund policies vary depending on the specific arrangements and are subject to the terms of our travel partners. Exploration Tours will communicate these policies to clients at the time of booking.</p>
+          {/* 3. Traveler Responsibilities */}
+          <section>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm flex items-center justify-center shrink-0">3</span>
+              <h2 className="text-2xl font-display font-bold text-slate-900">Traveler Responsibilities &amp; Documentation</h2>
+            </div>
+            <div className="pl-11 space-y-3 text-sm text-slate-600 leading-relaxed">
+              <p>
+                3.1 <strong>Passports &amp; Visas:</strong> The client is solely responsible for possessing a passport valid for at least 6 months beyond the intended return date, along with necessary tourist visas, transit visas, and health clearances.
+              </p>
+              <p>
+                3.2 <strong>Accuracy of Names:</strong> Traveler names provided at the time of booking must match the exact spelling on government-issued passports. Reissuance charges incurred due to incorrect spelling will be borne by the client.
+              </p>
+              <p>
+                3.3 <strong>Conduct &amp; Local Laws:</strong> Travelers are expected to respect local customs, laws, and regulations of host nations. Unlawful conduct may result in immediate termination of travel services without compensation.
+              </p>
+            </div>
+          </section>
 
-          <h2 className="text-2xl mt-10 mb-4">Travel Insurance</h2>
-          <p>Exploration Tours strongly recommends that clients obtain travel insurance to cover unforeseen circumstances such as trip cancellations, medical emergencies, and lost or damaged luggage. Clients are responsible for selecting and purchasing appropriate insurance coverage.</p>
+          {/* 4. Travel Insurance */}
+          <section>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm flex items-center justify-center shrink-0">4</span>
+              <h2 className="text-2xl font-display font-bold text-slate-900">Mandatory Travel Insurance Recommendation</h2>
+            </div>
+            <div className="pl-11">
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-blue-950 text-xs leading-relaxed flex items-start gap-3">
+                <ShieldCheck className="w-5 h-5 text-[#045a94] shrink-0 mt-0.5" />
+                <div>
+                  <h5 className="font-bold mb-1 text-sm">Comprehensive Coverage Advised</h5>
+                  Exploration Tours strongly mandates all guests to secure comprehensive international travel insurance covering emergency medical evacuation, trip cancellation, baggage loss, and flight interruption. Exploration Tours bears no liability for uninsurable personal losses.
+                </div>
+              </div>
+            </div>
+          </section>
 
-          <h2 className="text-2xl mt-10 mb-4">Limitation of Liability</h2>
-          <p>While Exploration Tours strives to provide accurate and reliable information and assistance, we cannot guarantee the availability, quality, or performance of third-party services such as airlines, hotels, or tour operators. We shall not be liable for any losses, damages, or expenses incurred as a result of such third-party services.</p>
-          <p>Exploration Tours shall not be liable for any indirect, incidental, consequential, or punitive damages arising out of or in connection with the use of our services.</p>
+          {/* 5. Force Majeure & Delays */}
+          <section>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm flex items-center justify-center shrink-0">5</span>
+              <h2 className="text-2xl font-display font-bold text-slate-900">Modifications, Delays &amp; Force Majeure</h2>
+            </div>
+            <div className="pl-11 space-y-3 text-sm text-slate-600 leading-relaxed">
+              <p>
+                5.1 In the event of circumstances beyond human control (&quot;Force Majeure&quot;)—including extreme weather conditions, volcanic eruptions, strikes, civil unrest, or governmental border restrictions—Exploration Tours will assist with alternative logistical arrangements.
+              </p>
+              <p>
+                5.2 Any additional expenses arising from unscheduled hotel overnights, charter rerouting, or medical contingencies remain the traveler&apos;s financial responsibility.
+              </p>
+            </div>
+          </section>
 
-          <h2 className="text-2xl mt-10 mb-4">Intellectual Property</h2>
-          <p>All content, including but not limited to text, images, logos, and graphics, displayed on the Exploration Tours website and promotional materials are the property of Exploration Tours or its licensors and are protected by copyright laws.</p>
-          <p>Clients may not use, reproduce, modify, or distribute any content from our website or promotional materials without prior written permission from Exploration Tours.</p>
-
-          <h2 className="text-2xl mt-10 mb-4">Amendments and Modifications</h2>
-          <p>Exploration Tours reserves the right to amend or modify these Terms and Conditions at any time without prior notice. The latest version of the Terms and Conditions will be posted on our website.</p>
-
-          <h2 className="text-2xl mt-10 mb-4">Governing Law and Jurisdiction</h2>
-          <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of Jaipur Jurisdiction. Any disputes arising out of or in connection with these terms shall be subject to the exclusive jurisdiction of the courts of Jaipur Jurisdiction.</p>
-
-          <p className="mt-8 font-medium">By engaging our services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
-
-          <p className="mt-8">If you have any questions or concerns about these Terms and Conditions, please contact us at <a href="mailto:mathur@explorationtours.com" className="text-[#045a94] underline">mathur@explorationtours.com</a></p>
-          <p className="text-sm text-slate-400 mt-4">Last updated: 09/03/2024</p>
+          {/* 6. Jurisdiction */}
+          <section className="pt-6 border-t border-slate-100">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm flex items-center justify-center shrink-0">6</span>
+              <h2 className="text-2xl font-display font-bold text-slate-900">Governing Law &amp; Dispute Resolution</h2>
+            </div>
+            <div className="pl-11 space-y-4 text-sm text-slate-600 leading-relaxed">
+              <p>
+                These Terms and Conditions and any non-contractual obligations arising out of them shall be governed by and construed in accordance with the substantive laws of India.
+              </p>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-xs">
+                <strong>Jurisdiction:</strong> Any legal action, dispute, or proceedings arising out of this agreement shall fall within the exclusive jurisdiction of the competent courts of <strong>Jaipur, Rajasthan, India</strong>.
+              </div>
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <Link
+                  href="/cancellation-and-refund-policies.html"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#045a94] hover:underline"
+                >
+                  <span>Review Cancellation &amp; Refund Slabs</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/privacy"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#045a94] hover:underline"
+                >
+                  <span>Review Privacy Policy</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </section>
 
         </div>
-      </section>
+      </div>
     </main>
   );
 }

@@ -32,7 +32,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="relative h-[500px] rounded-[2rem] overflow-hidden shadow-xl" data-aos="fade-left">
-            <Image src="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?q=80&w=800&auto=format&fit=crop" alt="Traveler" fill className="object-cover" />
+            <Image src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop" alt="Luxury Travel Experiences" fill className="object-cover" />
           </div>
         </div>
       </section>
@@ -51,18 +51,19 @@ export default function AboutPage() {
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/10 group">
                   <Image 
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Founder, Exploration Tours" 
+                    src="/images/founder-nitin-mathur.jpg" 
+                    alt="Nitin Mathur - Founder & Managing Director, Exploration Tours" 
                     fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                    priority
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                   
                   {/* Founder Badge Overlay */}
                   <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
                     <p className="text-xs uppercase tracking-widest text-brand-300 font-bold mb-1">Exploration Tours Leadership</p>
-                    <h3 className="text-2xl font-display font-bold text-white">Founder&apos;s Perspective</h3>
-                    <p className="text-sm text-slate-300 mt-1 font-medium">Bespoke Journeys &amp; Private Expeditions</p>
+                    <h3 className="text-2xl font-display font-bold text-white">Nitin Mathur</h3>
+                    <p className="text-sm text-slate-300 mt-1 font-medium">Founder &amp; Managing Director</p>
                   </div>
                 </div>
               </div>
@@ -93,8 +94,8 @@ export default function AboutPage() {
               {/* Founder Quote Card & Signoff */}
               <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div>
-                  <h4 className="text-xl font-display font-bold text-white">Founder &amp; Managing Director</h4>
-                  <p className="text-sm text-brand-300 font-medium">Exploration Tours &amp; Expeditions</p>
+                  <h4 className="text-xl font-display font-bold text-white">Nitin Mathur</h4>
+                  <p className="text-sm text-brand-300 font-medium">Founder &amp; Managing Director</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/15 text-xs text-slate-300 font-mono tracking-wider">

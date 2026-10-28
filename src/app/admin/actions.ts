@@ -145,6 +145,12 @@ export async function deletePackage(id: string) {
   revalidatePath('/admin/packages');
   revalidatePath('/packages');
 }
+
+export async function deleteCruise(id: string) {
+  await prisma.cruise.delete({ where: { id } });
+  revalidatePath('/admin/cruises');
+  revalidatePath('/cruises');
+}
 // --- BLOG POST ACTIONS ---
 export async function saveBlogPost(formData: FormData) {
   const id = formData.get('id') as string;

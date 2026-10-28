@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import Link from 'next/link';
-import { LayoutDashboard, Users, MapPin, Package, FileText, Settings, LogOut, FileCode } from 'lucide-react';
+import { LayoutDashboard, Users, MapPin, Package, Anchor, FileText, Settings, LogOut, FileCode } from 'lucide-react';
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const session = await getServerSession(authOptions);
@@ -34,6 +34,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
             </Link>
             <Link href="/admin/packages" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm">
               <Package className="w-4 h-4" /> Packages
+            </Link>
+            <Link href="/admin/cruises" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm">
+              <Anchor className="w-4 h-4" /> Cruises
             </Link>
             <Link href="/admin/blog" className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-slate-800 transition text-sm">
               <FileText className="w-4 h-4" /> Blog

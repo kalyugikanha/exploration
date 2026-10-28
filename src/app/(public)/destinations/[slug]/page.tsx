@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
-import { Heart, Facebook, Twitter, Instagram, MapPin, Clock, Sun, Play, MoreHorizontal } from 'lucide-react';
+import { Heart, Facebook, Twitter, Instagram, MapPin, Clock, Sun, Play, MoreHorizontal, Calendar, Sparkles, Send, Shield } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   try {
@@ -153,86 +153,114 @@ export default async function DestinationDetailPage({ params }: { params: { slug
             </div>
           </div>
 
-          {/* TIMELINE SECTION (Packages/Tours) */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-400 mb-8 uppercase tracking-widest">DAY 1</h2>
-            
-            <div className="relative border-l-2 border-slate-200 pl-8 pb-12 ml-6">
-              {/* Timeline Icon */}
-              <div className="absolute -left-[25px] top-0 w-12 h-12 rounded-full bg-[#045a94] text-white flex items-center justify-center shadow-lg border-4 border-white">
-                <Sun className="w-5 h-5" />
+          {/* PACKAGES & ITINERARY SECTION */}
+          <div className="mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-100">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#045a94] bg-sky-50 px-3 py-1 rounded-full mb-2 inline-block">
+                  Curated Experiences
+                </span>
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-900">
+                  Tour Packages for {dest.name}
+                </h2>
               </div>
-              
-              <h3 className="text-2xl font-display font-bold text-slate-900 mb-4 pt-1">Morning</h3>
-              <p className="text-slate-500 mb-10 leading-relaxed font-medium">
-                Save hours of time on a skip-the-line walking tour of the highlights. With your guide leading the way, toss a coin in the fountain, climb the hills, and people watch at the plazas. You can even check out the sights by Segway!
-              </p>
-
-              {/* Package Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {dest.packages.length > 0 ? (
-                  dest.packages.map(pkg => (
-                    <div key={pkg.id} className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow flex flex-col group">
-                      <Link href={`/packages/${pkg.slug}`} className="relative w-full aspect-[4/3] block overflow-hidden">
-                        <Image src={pkg.heroImage || defaultImages[0]} alt={pkg.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
-                        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                          <Heart className="w-3.5 h-3.5" /> 4.5k
-                        </div>
-                      </Link>
-                      <div className="p-6 flex flex-col flex-1">
-                        <h4 className="font-bold text-[#045a94] text-xl mb-4 group-hover:text-slate-900 transition-colors">{pkg.title}</h4>
-                        <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider mb-6 flex-1">
-                          <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> Here</span>
-                          <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {pkg.duration || '2 - 3 Hours'}</span>
-                        </div>
-                        <Link href="/contact" className="block w-full text-center bg-[#045a94] text-white font-bold py-3.5 rounded-full hover:bg-[#03426e] transition-colors shadow-lg hover:shadow-[#045a94]/40 mt-auto uppercase tracking-wide text-sm">Get Package</Link>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  // Mock Data if no packages
-                  <>
-                    <div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow flex flex-col group">
-                      <div className="relative w-full aspect-[4/3] cursor-pointer overflow-hidden">
-                        <Image src={defaultImages[1]} alt="Tour 1" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
-                        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5"><Heart className="w-3.5 h-3.5" /> 4.5k</div>
-                      </div>
-                      <div className="p-6 flex flex-col flex-1">
-                        <h4 className="font-bold text-[#045a94] text-xl mb-4 group-hover:text-slate-900 transition-colors">Colosseum, Roman Forum</h4>
-                        <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider mb-6 flex-1">
-                          <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> Here</span>
-                          
-                        </div>
-                        <Link href="/contact" className="block w-full text-center bg-[#045a94] text-white font-bold py-3.5 rounded-full hover:bg-[#03426e] transition-colors shadow-lg hover:shadow-[#045a94]/40 mt-auto uppercase tracking-wide text-sm">Get Package</Link>
-                      </div>
-                    </div>
-                    <div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow flex flex-col group">
-                      <div className="relative w-full aspect-[4/3] cursor-pointer overflow-hidden">
-                        <Image src={defaultImages[2]} alt="Tour 2" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
-                        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5"><Heart className="w-3.5 h-3.5" /> 4.5k</div>
-                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                          <div className="w-14 h-14 rounded-full border-2 border-white flex items-center justify-center text-white backdrop-blur-md shadow-2xl group-hover:scale-110 transition-transform"><Play className="w-6 h-6 ml-1" /></div>
-                        </div>
-                      </div>
-                      <div className="p-6 flex flex-col flex-1">
-                        <h4 className="font-bold text-[#045a94] text-xl mb-4 group-hover:text-slate-900 transition-colors">Segway Tour</h4>
-                        <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider mb-6 flex-1">
-                          <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> Here</span>
-                          
-                        </div>
-                        <Link href="/contact" className="block w-full text-center bg-[#045a94] text-white font-bold py-3.5 rounded-full hover:bg-[#03426e] transition-colors shadow-lg hover:shadow-[#045a94]/40 mt-auto uppercase tracking-wide text-sm">Get Package</Link>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
+              <Link
+                href={`/contact?destination=${encodeURIComponent(dest.name)}`}
+                className="self-start sm:self-auto inline-flex items-center gap-2 text-sm font-bold text-[#045a94] hover:text-[#03426e] hover:underline"
+              >
+                <span>Custom Itinerary Request</span>
+                <Send className="w-3.5 h-3.5" />
+              </Link>
             </div>
+
+            {dest.packages && dest.packages.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {dest.packages.map((pkg: any) => (
+                  <div key={pkg.id} className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <Link href={`/packages/${pkg.slug}`} className="relative w-full aspect-[4/3] block overflow-hidden">
+                      <Image 
+                        src={pkg.heroImage || defaultImages[0]} 
+                        alt={pkg.title} 
+                        fill 
+                        className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                      />
+                      {pkg.duration && (
+                        <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
+                          <Clock className="w-3.5 h-3.5" /> {pkg.duration}
+                        </div>
+                      )}
+                    </Link>
+                    <div className="p-6 flex flex-col flex-1">
+                      <Link href={`/packages/${pkg.slug}`}>
+                        <h4 className="font-bold text-slate-900 text-lg mb-2 group-hover:text-[#045a94] transition-colors leading-tight">
+                          {pkg.title}
+                        </h4>
+                      </Link>
+                      <p className="text-slate-500 text-xs line-clamp-2 mb-6 leading-relaxed">
+                        {pkg.shortDesc || 'Discover handcrafted day-wise plans designed for memorable exploration.'}
+                      </p>
+                      
+                      <div className="grid grid-cols-2 gap-2 mt-auto">
+                        <Link 
+                          href={`/packages/${pkg.slug}`} 
+                          className="text-center bg-slate-50 text-[#045a94] font-bold py-2.5 rounded-lg hover:bg-[#045a94] hover:text-white transition-colors uppercase tracking-wider text-xs border border-slate-200"
+                        >
+                          Day-Wise Plan
+                        </Link>
+                        <Link 
+                          href={`/contact?destination=${encodeURIComponent(dest.name)}&package=${encodeURIComponent(pkg.title)}`} 
+                          className="text-center bg-[#045a94] text-white font-bold py-2.5 rounded-lg hover:bg-[#03426e] transition-colors uppercase tracking-wider text-xs shadow-sm"
+                        >
+                          Enquire Now
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-gradient-to-br from-slate-900 to-[#045a94] rounded-3xl p-8 md:p-10 text-white relative overflow-hidden shadow-lg">
+                <div className="relative z-10 max-w-2xl">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-brand-300 bg-white/10 px-3 py-1 rounded-full mb-4">
+                    <Sparkles className="w-3.5 h-3.5" /> Tailored Private Tours
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 leading-tight">
+                    Design a Bespoke Holiday in {dest.name}
+                  </h3>
+                  <p className="text-slate-200 text-sm md:text-base leading-relaxed mb-8 font-light">
+                    Whether you are seeking boutique luxury resorts, private guided cultural walks, or scenic leisure journeys, our destination managers curate complete day-by-day itineraries customized to your dates and preferences.
+                  </p>
+                  <Link
+                    href={`/contact?destination=${encodeURIComponent(dest.name)}`}
+                    className="inline-flex items-center gap-2 bg-white text-[#045a94] hover:bg-slate-100 font-bold px-8 py-3.5 rounded-xl shadow-lg transition-transform hover:-translate-y-0.5 text-sm uppercase tracking-wider"
+                  >
+                    <span>Plan My {dest.name} Journey</span>
+                    <Send className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
         {/* RIGHT COLUMN (SIDEBAR) */}
-        <div className="w-full lg:w-[30%] space-y-12">
+        <div className="w-full lg:w-[30%] space-y-10">
           
+          {/* Quick Destination Enquire CTA Card */}
+          <div className="bg-gradient-to-br from-slate-900 to-[#022238] text-white p-7 rounded-2xl shadow-lg border border-slate-800">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-brand-300 block mb-2">Tailored Holiday</span>
+            <h4 className="text-xl font-display font-bold mb-2">Visit {dest.name}</h4>
+            <p className="text-slate-300 text-xs leading-relaxed mb-6 font-light">
+              Connect with our destination specialist to plan an exclusive private holiday with verified accommodations and transfers.
+            </p>
+            <Link
+              href={`/contact?destination=${encodeURIComponent(dest.name)}`}
+              className="block w-full text-center bg-[#045a94] hover:bg-[#03426e] text-white font-bold py-3.5 rounded-xl transition-all shadow-md text-xs uppercase tracking-wider"
+            >
+              Enquire About {dest.name}
+            </Link>
+          </div>
+
           {/* Map Widget */}
           <div className="rounded-2xl overflow-hidden shadow-md relative w-full aspect-[4/3] border border-slate-200">
             <Image src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=600&auto=format&fit=crop" alt="Map Location" fill className="object-cover opacity-80" />

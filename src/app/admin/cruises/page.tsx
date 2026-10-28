@@ -1,10 +1,18 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
-import { Plus, Edit, Trash2, Anchor } from 'lucide-react';
-// import { deleteCruise } from '../actions'; // I will add this to actions.ts
+import { Plus, Edit, Anchor } from 'lucide-react';
+import DeleteButton from '@/components/admin/DeleteButton';
+import { deleteCruise } from '../actions';
+
+export const dynamic = 'force-dynamic';
 
 export default async function AdminCruisesList() {
-  const items = await prisma.cruise.findMany({ orderBy: { createdAt: 'desc' } });
+  let items: any[] = [];
+  try {
+    items = await prisma.cruise.findMany({ orderBy: { createdAt: 'desc' } });
+  } catch (e) {
+    console.error('Error loading cruises in admin:', e);
+  }
 
   return (
     <div>
@@ -38,10 +46,10 @@ export default async function AdminCruisesList() {
                     {item.isPublished ? 'Published' : 'Draft'}
                   </span>
                 </td>
-                <td className="p-4 flex gap-2">
+                <td className="p-4 flex items-center gap-3">
                   <Link href={`/admin/cruises/${item.id}`} className="p-2 bg-blue-50 text-brand-600 rounded hover:bg-blue-100"><Edit className="w-4 h-4" /></Link>
-                  <form>
-                    <button type="button" className="p-2 bg-red-50 text-red-600 rounded hover:bg-red-100"><Trash2 className="w-4 h-4" /></button>
+                  <form action={deleteCruise.bind(null, item.id)} className="inline">
+                    <DeleteButton />
                   </form>
                 </td>
               </tr>
